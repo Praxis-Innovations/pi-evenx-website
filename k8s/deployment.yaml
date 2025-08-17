@@ -2,11 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: evenx-website
-  namespace: evenx-website
+  namespace: evenx-dev
   labels:
     app: evenx-website
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: evenx-website
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: evenx-website
-        image: docker.io/praxisinnovations/evenx-website:latest
+        image: docker.io/praxisinnovations/evenx-website:0.0.1
         ports:
         - containerPort: 80
         resources:

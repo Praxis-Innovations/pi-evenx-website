@@ -1,0 +1,9 @@
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: evenx-website-frontend-config
+  namespace: evenx-dev
+spec:
+  redirectToHttps:
+    enabled: true
+  sslPolicy: "TLS_1_2"
