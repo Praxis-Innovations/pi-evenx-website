@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { buildApiUrl, ENDPOINTS } from '../config/api';
 import './ForgotPasswordPage.css';
 
 const ForgotPasswordPage = () => {
@@ -31,7 +32,7 @@ const ForgotPasswordPage = () => {
     try {
       // This would call your backend endpoint to send the reset email
       // For now, we'll simulate the API call
-      const response = await fetch('http://localhost:8080/forgot-password', {
+      const response = await fetch(buildApiUrl(ENDPOINTS.FORGOT_PASSWORD), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

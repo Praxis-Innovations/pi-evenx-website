@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { buildApiUrl, ENDPOINTS } from '../config/api';
 import './EmailVerificationPage.css';
 
 const EmailVerificationPage = () => {
@@ -24,7 +25,7 @@ const EmailVerificationPage = () => {
       
       // Make API call to Spring Boot backend
       try {
-        const response = await fetch(`http://localhost:8080/verify-email?token=${token}`, {
+        const response = await fetch(`${buildApiUrl(ENDPOINTS.VERIFY_EMAIL)}?token=${token}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

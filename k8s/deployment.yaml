@@ -17,9 +17,12 @@ spec:
     spec:
       containers:
       - name: evenx-website
-        image: docker.io/praxisinnovations/evenx-website:0.0.1
+        image: docker.io/praxisinnovations/evenx-website:0.0.2
         ports:
         - containerPort: 80
+        env:
+        - name: REACT_APP_API_URL
+          value: dp-evenx-orchestrator-service-dev
         resources:
           requests:
             memory: "64Mi"

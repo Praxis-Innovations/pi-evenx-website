@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { buildApiUrl, ENDPOINTS } from '../config/api';
 import './Contact.css';
 
 const Contact = () => {
@@ -75,7 +76,7 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('http://localhost:8080/api/contact/submit', {
+      const response = await fetch(buildApiUrl(ENDPOINTS.CONTACT_SUBMIT), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

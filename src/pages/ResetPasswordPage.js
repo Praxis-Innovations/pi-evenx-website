@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { buildApiUrl, ENDPOINTS } from '../config/api';
 import './ResetPasswordPage.css';
 
 const ResetPasswordPage = () => {
@@ -38,7 +39,7 @@ const ResetPasswordPage = () => {
     setMessage('🔄 Resetting your password...');
 
     try {
-      const response = await fetch('http://localhost:8080/reset-password', {
+      const response = await fetch(buildApiUrl(ENDPOINTS.RESET_PASSWORD), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
