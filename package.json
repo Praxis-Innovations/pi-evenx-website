@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "EvenX - Split Expenses Smartly - Official Website",
   "private": true,
+  "engines": {
+    "node": ">=18.14.0",
+    "yarn": ">=1.22.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -17,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "type-check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
@@ -38,7 +43,9 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^24.3.0",
     "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0"
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.9.2"
   }
 }

@@ -3,17 +3,20 @@ FROM node:18-alpine as build
 
 WORKDIR /app
 
+# Install yarn
+RUN apk add --no-cache yarn
+
 # Copy package files
-COPY package*.json ./
+COPY package.json yarn.lock* ./
 
 # Install dependencies
-RUN npm ci --only=production
+RUN yarn install --frozen-lockfile --production
 
 # Copy source code
 COPY . .
 
 # Build the app
-RUN npm run build
+RUN yarn build
 
 # Production stage
 FROM nginx:alpine
