@@ -22,7 +22,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build:local": "REACT_APP_API_URL=http://localhost:8080 yarn build",
+    "build:dev": "REACT_APP_API_URL=http://35.244.150.211 yarn build",
+    "build:prod": "REACT_APP_API_URL=https://api.evenx.io yarn build",
+    "docker:build:local": "./scripts/build-and-push.sh local",
+    "docker:build:dev": "./scripts/build-and-push.sh dev",
+    "docker:build:prod": "./scripts/build-and-push.sh prod",
+    "deploy:dev": "kubectl apply -f k8s/deployment-dev.yaml",
+    "deploy:prod": "kubectl apply -f k8s/deployment-prod.yaml"
   },
   "eslintConfig": {
     "extends": [

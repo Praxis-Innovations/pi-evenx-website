@@ -137,153 +137,255 @@ const Contact: React.FC = () => {
 
   const styles = {
     contact: {
-      padding: '80px 0',
-      background: '#f8fafc',
+      padding: '70px 0',
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)',
+      position: 'relative' as const,
+      overflow: 'hidden',
     },
     container: {
-      maxWidth: '1200px',
+      maxWidth: '1100px',
       margin: '0 auto',
-      padding: '0 20px',
+      padding: '0 30px',
+      position: 'relative' as const,
+      zIndex: 2,
     },
     sectionTitle: {
       textAlign: 'center' as const,
-      fontSize: '2.5rem',
-      fontWeight: 700,
-      color: '#1f2937',
-      marginBottom: '3rem',
+      fontSize: 'clamp(1.8rem, 4.5vw, 2.5rem)',
+      fontWeight: 800,
+      color: 'white',
+      marginBottom: '2.5rem',
+      background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+      lineHeight: 1.1,
+      textShadow: '0 0 30px rgba(96, 165, 250, 0.3)',
     },
     contactContent: {
       display: 'grid',
-      gridTemplateColumns: window.innerWidth <= 768 ? '1fr' : '1fr 1fr',
-      gap: '4rem',
+      gridTemplateColumns: window.innerWidth >= 768 ? '1fr 1fr' : '1fr',
+      gap: window.innerWidth >= 768 ? '3.5rem' : '2rem',
+      alignItems: 'stretch',
     },
     contactInfo: {
       display: 'flex',
       flexDirection: 'column' as const,
-      gap: '2rem',
+      gap: '0.8rem',
+      minHeight: 'fit-content',
+      justifyContent: 'space-between',
     },
     contactItem: {
       display: 'flex',
       alignItems: 'center',
-      gap: '1rem',
+      gap: '0.6rem',
+      padding: '0.9rem',
+      background: 'rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(15px)',
+      borderRadius: '14px',
+      boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+      border: '1px solid rgba(255, 255, 255, 0.2)',
+      transition: 'all 0.3s ease',
     },
     contactIcon: {
-      width: '50px',
-      height: '50px',
-      background: '#6366f1',
+      width: '38px',
+      height: '38px',
+      background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
       borderRadius: '50%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       color: 'white',
-      fontSize: '1.2rem',
+      fontSize: '1rem',
+      flexShrink: 0,
+      boxShadow: '0 4px 15px rgba(96, 165, 250, 0.3)',
     },
     contactText: {
       flex: 1,
+      minWidth: 0,
     },
     contactTitle: {
-      fontSize: '1.1rem',
-      fontWeight: 600,
-      color: '#1f2937',
-      marginBottom: '0.5rem',
+      fontSize: '0.9rem',
+      fontWeight: 700,
+      color: 'white',
+      marginBottom: '0.15rem',
+      lineHeight: 1.3,
     },
     contactValue: {
-      color: '#6b7280',
+      color: 'rgba(255, 255, 255, 0.8)',
+      fontSize: '0.85rem',
+      lineHeight: 1.4,
     },
     socialLinks: {
       display: 'flex',
       gap: '1rem',
-      marginTop: '2rem',
+      marginTop: '1.5rem',
+      justifyContent: 'center',
     },
     socialLink: {
-      width: '50px',
-      height: '50px',
-      background: '#6366f1',
+      width: '42px',
+      height: '42px',
+      background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
       borderRadius: '50%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       color: 'white',
-      fontSize: '1.2rem',
+      fontSize: '1rem',
       cursor: 'pointer',
       border: 'none',
-      transition: 'background-color 0.3s ease',
+      transition: 'all 0.3s ease',
+      boxShadow: '0 6px 20px rgba(96, 165, 250, 0.4)',
     },
     contactForm: {
-      background: 'white',
+      background: 'rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(20px)',
       padding: '2rem',
-      borderRadius: '12px',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.05)',
+      borderRadius: '20px',
+      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+      border: '1px solid rgba(255, 255, 255, 0.2)',
+      position: 'relative' as const,
+      overflow: 'hidden',
     },
     formGroup: {
-      marginBottom: '1.5rem',
+      marginBottom: '1rem',
     },
     label: {
       display: 'block',
       marginBottom: '0.5rem',
-      fontWeight: 500,
+      fontWeight: 600,
       color: '#374151',
+      fontSize: '0.85rem',
+      textTransform: 'uppercase' as const,
+      letterSpacing: '0.5px',
     },
     input: {
       width: '100%',
-      padding: '12px',
-      border: '1px solid #d1d5db',
-      borderRadius: '8px',
-      fontSize: '1rem',
-      transition: 'border-color 0.3s ease',
+      padding: '14px 18px',
+      border: '2px solid rgba(255, 255, 255, 0.2)',
+      borderRadius: '14px',
+      fontSize: '0.95rem',
+      transition: 'all 0.3s ease',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      color: 'white',
+      boxSizing: 'border-box' as const,
+      backdropFilter: 'blur(10px)',
     },
     textarea: {
       width: '100%',
-      padding: '12px',
-      border: '1px solid #d1d5db',
-      borderRadius: '8px',
-      fontSize: '1rem',
-      minHeight: '120px',
+      padding: '14px 18px',
+      border: '2px solid rgba(255, 255, 255, 0.2)',
+      borderRadius: '14px',
+      fontSize: '0.95rem',
+      minHeight: '140px',
       resize: 'vertical' as const,
-      transition: 'border-color 0.3s ease',
+      transition: 'all 0.3s ease',
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      color: 'white',
+      boxSizing: 'border-box' as const,
+      fontFamily: 'inherit',
+      backdropFilter: 'blur(10px)',
     },
     error: {
       color: '#dc2626',
-      fontSize: '0.875rem',
-      marginTop: '0.25rem',
+      fontSize: '0.8rem',
+      marginTop: '0.4rem',
+      fontWeight: 500,
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.4rem',
     },
     submitButton: {
-      background: '#6366f1',
+      background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%)',
       color: 'white',
       border: 'none',
-      padding: '12px 24px',
-      borderRadius: '8px',
+      padding: '16px 28px',
+      borderRadius: '14px',
       fontSize: '1rem',
-      fontWeight: 600,
+      fontWeight: 700,
       cursor: 'pointer',
       width: '100%',
-      transition: 'background-color 0.3s ease',
+      transition: 'all 0.3s ease',
+      textTransform: 'uppercase' as const,
+      letterSpacing: '0.5px',
+      boxShadow: '0 8px 25px rgba(96, 165, 250, 0.4)',
+      position: 'relative' as const,
+      overflow: 'hidden',
     },
     message: {
-      padding: '12px',
-      borderRadius: '8px',
+      padding: '12px 16px',
+      borderRadius: '10px',
       marginBottom: '1rem',
       textAlign: 'center' as const,
+      fontWeight: 500,
+      fontSize: '0.9rem',
     },
     messageSuccess: {
-      background: '#d1fae5',
+      background: 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)',
       color: '#065f46',
-      border: '1px solid #a7f3d0',
+      border: '2px solid #10b981',
+      boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)',
     },
     messageError: {
-      background: '#fee2e2',
+      background: 'linear-gradient(135deg, #fee2e2 0%, #fca5a5 100%)',
       color: '#991b1b',
-      border: '1px solid #fca5a5',
+      border: '2px solid #ef4444',
+      boxShadow: '0 4px 12px rgba(239, 68, 68, 0.2)',
     },
   };
 
   return (
     <section id="contact" style={styles.contact}>
+      {/* Floating decorative elements */}
+      <div style={{
+        position: 'absolute',
+        top: '25%',
+        right: '10%',
+        width: '60px',
+        height: '60px',
+        background: 'radial-gradient(circle, rgba(96, 165, 250, 0.15) 0%, transparent 70%)',
+        borderRadius: '50%',
+        animation: 'float 8s ease-in-out infinite',
+        zIndex: 1,
+      }}></div>
+      <div style={{
+        position: 'absolute',
+        bottom: '30%',
+        left: '8%',
+        width: '45px',
+        height: '45px',
+        background: 'radial-gradient(circle, rgba(167, 139, 250, 0.12) 0%, transparent 70%)',
+        borderRadius: '50%',
+        animation: 'float 10s ease-in-out infinite reverse',
+        zIndex: 1,
+      }}></div>
+      
       <div style={styles.container}>
-        <h2 style={styles.sectionTitle}>Get in Touch</h2>
-        <div style={styles.contactContent}>
+        <h2 style={{
+          ...styles.sectionTitle,
+          animation: 'fadeInUp 1s ease-out'
+        }}>Get in Touch</h2>
+        <div style={{
+          ...styles.contactContent,
+          animation: 'fadeInUp 1s ease-out 0.2s both'
+        }}>
           <div style={styles.contactInfo}>
-            <div style={styles.contactItem}>
+            <div 
+              style={{
+                ...styles.contactItem,
+                animation: 'slideInLeft 0.8s ease-out 0.4s both'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                e.currentTarget.style.borderColor = '#6366f1';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                e.currentTarget.style.borderColor = '#e5e7eb';
+              }}
+            >
               <div style={styles.contactIcon}>
                 <i className="fas fa-envelope"></i>
               </div>
@@ -293,7 +395,22 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div style={styles.contactItem}>
+            <div 
+              style={{
+                ...styles.contactItem,
+                animation: 'slideInLeft 0.8s ease-out 0.6s both'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                e.currentTarget.style.borderColor = '#6366f1';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                e.currentTarget.style.borderColor = '#e5e7eb';
+              }}
+            >
               <div style={styles.contactIcon}>
                 <i className="fas fa-phone"></i>
               </div>
@@ -303,7 +420,22 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div style={styles.contactItem}>
+            <div 
+              style={{
+                ...styles.contactItem,
+                animation: 'slideInLeft 0.8s ease-out 0.8s both'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+                e.currentTarget.style.borderColor = '#6366f1';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                e.currentTarget.style.borderColor = '#e5e7eb';
+              }}
+            >
               <div style={styles.contactIcon}>
                 <i className="fas fa-map-marker-alt"></i>
               </div>
@@ -318,10 +450,14 @@ const Contact: React.FC = () => {
                 style={styles.socialLink}
                 onClick={() => handleSocialClick('Twitter')}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#4f46e5';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)';
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#6366f1';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.3)';
                 }}
               >
                 <i className="fab fa-twitter"></i>
@@ -330,10 +466,14 @@ const Contact: React.FC = () => {
                 style={styles.socialLink}
                 onClick={() => handleSocialClick('Facebook')}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#4f46e5';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)';
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#6366f1';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.3)';
                 }}
               >
                 <i className="fab fa-facebook"></i>
@@ -342,10 +482,14 @@ const Contact: React.FC = () => {
                 style={styles.socialLink}
                 onClick={() => handleSocialClick('Instagram')}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#4f46e5';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)';
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#6366f1';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.3)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
                 }}
               >
                 <i className="fab fa-instagram"></i>
@@ -354,10 +498,14 @@ const Contact: React.FC = () => {
                 style={styles.socialLink}
                 onClick={() => handleSocialClick('LinkedIn')}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#4f46e5';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)';
+                  e.currentTarget.style.boxShadow = '0 8px 20px rgba(99, 102, 241, 0.4)';
+                  e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.background = '#6366f1';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(99, 102, 241, 0.3)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
                 }}
               >
                 <i className="fab fa-linkedin"></i>
@@ -365,12 +513,23 @@ const Contact: React.FC = () => {
             </div>
           </div>
           
-          <div style={styles.contactForm}>
+          <div style={{
+            ...styles.contactForm,
+            animation: 'slideInRight 0.8s ease-out 1s both'
+          }}>
             {message && (
               <div style={{
                 ...styles.message,
                 ...(messageType === 'success' ? styles.messageSuccess : styles.messageError)
               }}>
+                <i 
+                  className={messageType === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-triangle'} 
+                  style={{ 
+                    fontSize: '1.2rem', 
+                    marginRight: '0.75rem',
+                    color: messageType === 'success' ? '#10b981' : '#ef4444'
+                  }}
+                ></i>
                 {message}
               </div>
             )}
@@ -382,14 +541,33 @@ const Contact: React.FC = () => {
                   type="text"
                   id="name"
                   name="name"
+                  placeholder="Enter your name (2-100 characters)"
                   value={formData.name}
                   onChange={handleInputChange}
                   style={{
                     ...styles.input,
-                    borderColor: errors.name ? '#dc2626' : '#d1d5db'
+                    borderColor: errors.name ? '#dc2626' : '#e5e7eb',
+                    outline: 'none',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = '#6366f1';
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.boxShadow = '0 0 0 4px rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = errors.name ? '#dc2626' : '#e5e7eb';
+                    e.currentTarget.style.backgroundColor = '#f9fafb';
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'scale(1)';
                   }}
                 />
-                {errors.name && <div style={styles.error}>{errors.name}</div>}
+                {errors.name && (
+                  <div style={styles.error}>
+                    <i className="fas fa-exclamation-circle" style={{ fontSize: '1rem' }}></i>
+                    {errors.name}
+                  </div>
+                )}
               </div>
               
               <div style={styles.formGroup}>
@@ -398,14 +576,33 @@ const Contact: React.FC = () => {
                   type="email"
                   id="email"
                   name="email"
+                  placeholder="Enter your email address"
                   value={formData.email}
                   onChange={handleInputChange}
                   style={{
                     ...styles.input,
-                    borderColor: errors.email ? '#dc2626' : '#d1d5db'
+                    borderColor: errors.email ? '#dc2626' : '#e5e7eb',
+                    outline: 'none',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = '#6366f1';
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.boxShadow = '0 0 0 4px rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = errors.email ? '#dc2626' : '#e5e7eb';
+                    e.currentTarget.style.backgroundColor = '#f9fafb';
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'scale(1)';
                   }}
                 />
-                {errors.email && <div style={styles.error}>{errors.email}</div>}
+                {errors.email && (
+                  <div style={styles.error}>
+                    <i className="fas fa-exclamation-circle" style={{ fontSize: '1rem' }}></i>
+                    {errors.email}
+                  </div>
+                )}
               </div>
               
               <div style={styles.formGroup}>
@@ -414,14 +611,33 @@ const Contact: React.FC = () => {
                   type="text"
                   id="subject"
                   name="subject"
+                  placeholder="Enter subject (5-200 characters)"
                   value={formData.subject}
                   onChange={handleInputChange}
                   style={{
                     ...styles.input,
-                    borderColor: errors.subject ? '#dc2626' : '#d1d5db'
+                    borderColor: errors.subject ? '#dc2626' : '#e5e7eb',
+                    outline: 'none',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = '#6366f1';
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.boxShadow = '0 0 0 4px rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = errors.subject ? '#dc2626' : '#e5e7eb';
+                    e.currentTarget.style.backgroundColor = '#f9fafb';
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'scale(1)';
                   }}
                 />
-                {errors.subject && <div style={styles.error}>{errors.subject}</div>}
+                {errors.subject && (
+                  <div style={styles.error}>
+                    <i className="fas fa-exclamation-circle" style={{ fontSize: '1rem' }}></i>
+                    {errors.subject}
+                  </div>
+                )}
               </div>
               
               <div style={styles.formGroup}>
@@ -429,31 +645,59 @@ const Contact: React.FC = () => {
                 <textarea
                   id="message"
                   name="message"
+                  placeholder="Enter your message (10-2000 characters)"
                   value={formData.message}
                   onChange={handleInputChange}
                   style={{
                     ...styles.textarea,
-                    borderColor: errors.message ? '#dc2626' : '#d1d5db'
+                    borderColor: errors.message ? '#dc2626' : '#e5e7eb',
+                    outline: 'none',
+                  }}
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderColor = '#6366f1';
+                    e.currentTarget.style.backgroundColor = 'white';
+                    e.currentTarget.style.boxShadow = '0 0 0 4px rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderColor = errors.message ? '#dc2626' : '#e5e7eb';
+                    e.currentTarget.style.backgroundColor = '#f9fafb';
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.transform = 'scale(1)';
                   }}
                 />
-                {errors.message && <div style={styles.error}>{errors.message}</div>}
+                {errors.message && (
+                  <div style={styles.error}>
+                    <i className="fas fa-exclamation-circle" style={{ fontSize: '1rem' }}></i>
+                    {errors.message}
+                  </div>
+                )}
               </div>
               
               <button 
                 type="submit" 
-                style={styles.submitButton}
+                style={{
+                  ...styles.submitButton,
+                  opacity: isSubmitting ? 0.7 : 1,
+                  cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                }}
                 disabled={isSubmitting}
                 onMouseEnter={(e) => {
                   if (!isSubmitting) {
-                    e.currentTarget.style.background = '#4f46e5';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #4f46e5 0%, #3730a3 100%)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(99, 102, 241, 0.4)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isSubmitting) {
-                    e.currentTarget.style.background = '#6366f1';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 14px rgba(99, 102, 241, 0.3)';
                   }
                 }}
               >
+                <i className="fas fa-paper-plane" style={{ marginRight: '8px' }}></i>
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>

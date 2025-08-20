@@ -15,6 +15,10 @@ RUN yarn install --frozen-lockfile --production
 # Copy source code
 COPY . .
 
+# Build-time environment variable (can be overridden with --build-arg)
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=${REACT_APP_API_URL}
+
 # Build the app
 RUN yarn build
 
