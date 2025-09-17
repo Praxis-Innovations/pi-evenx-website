@@ -254,7 +254,7 @@ const Contact: React.FC = () => {
       display: 'block',
       marginBottom: '0.5rem',
       fontWeight: 600,
-      color: '#374151',
+      color: '#3b82f6',
       fontSize: '0.85rem',
       textTransform: 'uppercase' as const,
       letterSpacing: '0.5px',
