@@ -163,10 +163,10 @@ const Contact: React.FC = () => {
       textShadow: '0 0 30px rgba(96, 165, 250, 0.3)',
     },
     contactContent: {
-      display: 'grid',
-      gridTemplateColumns: window.innerWidth >= 768 ? '1fr 1fr' : '1fr',
-      gap: window.innerWidth >= 768 ? '3.5rem' : '2rem',
-      alignItems: 'stretch',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '2rem',
     },
     contactInfo: {
       display: 'flex',
@@ -246,6 +246,8 @@ const Contact: React.FC = () => {
       border: '1px solid rgba(255, 255, 255, 0.2)',
       position: 'relative' as const,
       overflow: 'hidden',
+      maxWidth: '600px',
+      width: '100%',
     },
     formGroup: {
       marginBottom: '1rem',
@@ -369,7 +371,10 @@ const Contact: React.FC = () => {
           ...styles.contactContent,
           animation: 'fadeInUp 1s ease-out 0.2s both'
         }}>
-          <div style={styles.contactInfo}>
+          <div style={{
+            ...styles.contactInfo,
+            display: 'none' // Hide the contact information section
+          }}>
             <div 
               style={{
                 ...styles.contactItem,

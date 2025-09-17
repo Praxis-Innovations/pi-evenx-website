@@ -125,7 +125,8 @@ const About: React.FC = () => {
           
           <div style={{
             ...styles.stats,
-            animation: 'slideInLeft 1s ease-out 0.6s both'
+            animation: 'slideInLeft 1s ease-out 0.6s both',
+            display: 'none' // Hide the stats section
           }}>
             <div style={styles.stat}>
               <div style={styles.statNumber}>100+</div>
