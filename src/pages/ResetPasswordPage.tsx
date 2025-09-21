@@ -25,6 +25,8 @@ const ResetPasswordPage: React.FC = () => {
   const [resetStatus, setResetStatus] = useState<ResetStatus>('ready');
   const [message, setMessage] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const hasProcessed = useRef<boolean>(false);
 
   const token = searchParams.get('token');
@@ -197,6 +199,36 @@ const ResetPasswordPage: React.FC = () => {
       borderRadius: '8px',
       fontSize: '1rem',
       transition: 'border-color 0.3s ease',
+    },
+    passwordInputContainer: {
+      position: 'relative' as const,
+      display: 'flex',
+      alignItems: 'center',
+    },
+    passwordInput: {
+      width: '100%',
+      padding: '12px 45px 12px 12px',
+      border: '1px solid #d1d5db',
+      borderRadius: '8px',
+      fontSize: '1rem',
+      transition: 'border-color 0.3s ease',
+      outline: 'none',
+    },
+    passwordToggle: {
+      position: 'absolute' as const,
+      right: '12px',
+      top: '50%',
+      transform: 'translateY(-50%)',
+      background: 'none',
+      border: 'none',
+      cursor: 'pointer',
+      color: '#6b7280',
+      fontSize: '1rem',
+      padding: '4px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      transition: 'color 0.3s ease',
     },
     error: {
       color: '#dc2626',
@@ -376,37 +408,67 @@ const ResetPasswordPage: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <div style={styles.formGroup}>
             <label htmlFor="newPassword" style={styles.label}>New Password</label>
-            <input
-              type="password"
-              id="newPassword"
-              name="newPassword"
-              value={formData.newPassword}
-              onChange={handleInputChange}
-              placeholder="Enter your new password"
-              style={{
-                ...styles.input,
-                borderColor: errors.newPassword ? '#dc2626' : '#d1d5db'
-              }}
-              required
-            />
+            <div style={styles.passwordInputContainer}>
+              <input
+                type={showNewPassword ? "text" : "password"}
+                id="newPassword"
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handleInputChange}
+                placeholder="Enter your new password"
+                style={{
+                  ...styles.passwordInput,
+                  borderColor: errors.newPassword ? '#dc2626' : '#d1d5db'
+                }}
+                required
+              />
+              <button
+                type="button"
+                style={styles.passwordToggle}
+                onClick={() => setShowNewPassword(!showNewPassword)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#374151';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#6b7280';
+                }}
+              >
+                <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
             {errors.newPassword && <div style={styles.error}>{errors.newPassword}</div>}
           </div>
           
           <div style={styles.formGroup}>
             <label htmlFor="confirmPassword" style={styles.label}>Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleInputChange}
-              placeholder="Confirm your new password"
-              style={{
-                ...styles.input,
-                borderColor: errors.confirmPassword ? '#dc2626' : '#d1d5db'
-              }}
-              required
-            />
+            <div style={styles.passwordInputContainer}>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                placeholder="Confirm your new password"
+                style={{
+                  ...styles.passwordInput,
+                  borderColor: errors.confirmPassword ? '#dc2626' : '#d1d5db'
+                }}
+                required
+              />
+              <button
+                type="button"
+                style={styles.passwordToggle}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = '#374151';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = '#6b7280';
+                }}
+              >
+                <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+              </button>
+            </div>
             {errors.confirmPassword && <div style={styles.error}>{errors.confirmPassword}</div>}
           </div>
           
