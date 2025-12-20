@@ -1,13 +1,64 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { sharedStyles } from '@/lib/shared';
 
 type VerificationStatus = 'verifying' | 'success' | 'error';
 
+/**
+ * Loading fallback component for Suspense boundary
+ */
+function EmailVerificationLoading() {
+  const styles = {
+    page: {
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      padding: '20px',
+    },
+    container: {
+      ...sharedStyles.container,
+      textAlign: 'center' as const,
+      background: 'white',
+      borderRadius: '20px',
+      padding: '40px',
+      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+      maxWidth: '500px',
+      width: '100%',
+    },
+    title: {
+      fontSize: '2rem',
+      fontWeight: 700,
+      color: '#1f2937',
+      marginBottom: '20px',
+    },
+  };
+
+  return (
+    <div style={styles.page}>
+      <div style={styles.container}>
+        <h2 style={styles.title}>Loading...</h2>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Wrapper component that provides Suspense boundary for useSearchParams
+ */
 export default function EmailVerificationPage() {
+  return (
+    <Suspense fallback={<EmailVerificationLoading />}>
+      <EmailVerificationContent />
+    </Suspense>
+  );
+}
+
+function EmailVerificationContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [verificationStatus, setVerificationStatus] = useState<VerificationStatus>('verifying');

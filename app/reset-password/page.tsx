@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
@@ -18,7 +18,65 @@ interface FormErrors {
   confirmPassword?: string;
 }
 
+/**
+ * Loading fallback component for Suspense boundary
+ */
+function ResetPasswordLoading() {
+  const styles = {
+    resetPasswordPage: {
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      padding: '20px',
+    },
+    container: {
+      background: 'white',
+      padding: '3rem',
+      borderRadius: '16px',
+      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+      maxWidth: '500px',
+      width: '100%',
+      textAlign: 'center' as const,
+    },
+    logo: {
+      display: 'flex',
+      justifyContent: 'center',
+      marginBottom: '1rem',
+    },
+    title: {
+      fontSize: '2rem',
+      fontWeight: 700,
+      color: '#1f2937',
+      marginBottom: '1rem',
+    },
+  };
+
+  return (
+    <div style={styles.resetPasswordPage}>
+      <div style={styles.container}>
+        <div style={styles.logo}>
+          <Image src="/evenx-logo.png" alt="EvenX logo" width={56} height={56} />
+        </div>
+        <h2 style={styles.title}>Loading...</h2>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Wrapper component that provides Suspense boundary for useSearchParams
+ */
 export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<ResetPasswordLoading />}>
+      <ResetPasswordContent />
+    </Suspense>
+  );
+}
+
+function ResetPasswordContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
