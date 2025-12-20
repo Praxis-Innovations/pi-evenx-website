@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: evenx-prod
-  labels:
-    name: evenx-prod
-    environment: production
