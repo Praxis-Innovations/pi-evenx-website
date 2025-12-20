@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { buildApiUrl, ENDPOINTS } from '../config/api';
+import { getPasswordStrengthResult, isPasswordStrongEnough } from '../utils/passwordStrength';
 
 type ResetStatus = 'ready' | 'processing' | 'success' | 'error';
 
@@ -27,6 +28,7 @@ const ResetPasswordPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [passwordStrength, setPasswordStrength] = useState(getPasswordStrengthResult(''));
   const hasProcessed = useRef<boolean>(false);
 
   const token = searchParams.get('token');
@@ -85,6 +87,8 @@ const ResetPasswordPage: React.FC = () => {
       newErrors.newPassword = 'New password is required';
     } else if (formData.newPassword.length < 6) {
       newErrors.newPassword = 'Password must be at least 6 characters long';
+    } else if (!isPasswordStrongEnough(formData.newPassword)) {
+      newErrors.newPassword = 'Password is too weak. Please use a stronger password.';
     }
 
     if (!formData.confirmPassword) {
@@ -103,6 +107,11 @@ const ResetPasswordPage: React.FC = () => {
       ...prev,
       [name]: value
     }));
+    
+    // Update password strength when new password changes
+    if (name === 'newPassword') {
+      setPasswordStrength(getPasswordStrengthResult(value));
+    }
     
     // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
@@ -229,6 +238,30 @@ const ResetPasswordPage: React.FC = () => {
       alignItems: 'center',
       justifyContent: 'center',
       transition: 'color 0.3s ease',
+    },
+    passwordStrengthContainer: {
+      marginTop: '0.5rem',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '0.5rem',
+    },
+    passwordStrengthBar: {
+      flex: 1,
+      height: '4px',
+      background: '#e5e7eb',
+      borderRadius: '2px',
+      overflow: 'hidden',
+    },
+    passwordStrengthFill: {
+      height: '100%',
+      transition: 'all 0.3s ease',
+      borderRadius: '2px',
+    },
+    passwordStrengthLabel: {
+      fontSize: '0.75rem',
+      fontWeight: 500,
+      minWidth: '60px',
+      textAlign: 'right' as const,
     },
     error: {
       color: '#dc2626',
@@ -436,6 +469,27 @@ const ResetPasswordPage: React.FC = () => {
                 <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
               </button>
             </div>
+            {formData.newPassword && (
+              <div style={styles.passwordStrengthContainer}>
+                <div style={styles.passwordStrengthBar}>
+                  <div 
+                    style={{
+                      ...styles.passwordStrengthFill,
+                      width: `${(passwordStrength.strength / 5) * 100}%`,
+                      background: passwordStrength.color,
+                    }}
+                  />
+                </div>
+                <span 
+                  style={{
+                    ...styles.passwordStrengthLabel,
+                    color: passwordStrength.color,
+                  }}
+                >
+                  {passwordStrength.label}
+                </span>
+              </div>
+            )}
             {errors.newPassword && <div style={styles.error}>{errors.newPassword}</div>}
           </div>
           
