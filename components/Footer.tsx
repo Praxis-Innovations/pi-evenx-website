@@ -184,10 +184,10 @@ const Footer: React.FC = () => {
                 <a href="#" style={styles.footerLinkA}>Help Center</a>
               </li>
               <li style={styles.footerLink}>
-                <a href="#" style={styles.footerLinkA}>Privacy Policy</a>
+                <a href="/privacy_policy.html" style={styles.footerLinkA}>Privacy Policy</a>
               </li>
               <li style={styles.footerLink}>
-                <a href="#" style={styles.footerLinkA}>Terms of Service</a>
+                <a href="/terms_and_conditions.html" style={styles.footerLinkA}>Terms of Service</a>
               </li>
               <li style={styles.footerLink}>
                 <a href="#" style={styles.footerLinkA}>FAQ</a>
