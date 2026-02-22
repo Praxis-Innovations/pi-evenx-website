@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { colors, gradients, shadows, radius } from '@/lib/theme';
 
 export default function AccountDeletionPage() {
   const styles = {
@@ -11,15 +12,14 @@ export default function AccountDeletionPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: gradients.hero_bg,
       padding: '20px',
-      fontFamily: '"Inter", sans-serif',
     },
     container: {
-      background: 'white',
+      background: colors.white,
       padding: '3rem',
-      borderRadius: '16px',
-      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+      borderRadius: radius.xl,
+      boxShadow: shadows.xl,
       maxWidth: '600px',
       width: '100%',
       textAlign: 'center' as const,
@@ -32,12 +32,12 @@ export default function AccountDeletionPage() {
     title: {
       fontSize: '2rem',
       fontWeight: 700,
-      color: '#1f2937',
+      color: colors.neutral[900],
       marginBottom: '1.5rem',
       letterSpacing: '-0.02em',
     },
     subtitle: {
-      color: '#6b7280',
+      color: colors.neutral[500],
       marginBottom: '2rem',
       lineHeight: 1.6,
       fontSize: '1rem',
@@ -62,8 +62,8 @@ export default function AccountDeletionPage() {
       width: '28px',
       height: '28px',
       borderRadius: '50%',
-      background: '#6366f1',
-      color: 'white',
+      background: gradients.primary,
+      color: colors.white,
       fontSize: '0.875rem',
       fontWeight: '600',
       marginRight: '1rem',
@@ -71,31 +71,31 @@ export default function AccountDeletionPage() {
       marginTop: '2px',
     },
     instructionText: {
-      color: '#374151',
+      color: colors.neutral[600],
       flex: 1,
     },
     strongText: {
       fontWeight: 600,
-      color: '#1f2937',
+      color: colors.neutral[900],
     },
     warningBox: {
-      background: '#fef2f2',
-      border: '1px solid #fecaca',
-      borderRadius: '8px',
+      background: colors.error[50],
+      border: `1px solid ${colors.error[200]}`,
+      borderRadius: radius.md,
       padding: '1.5rem',
       marginBottom: '2rem',
       textAlign: 'left' as const,
     },
     warningTitle: {
       fontWeight: 600,
-      color: '#dc2626',
+      color: colors.error[600],
       marginBottom: '0.5rem',
       display: 'flex',
       alignItems: 'center',
       gap: '0.5rem',
     },
     warningText: {
-      color: '#7f1d1d',
+      color: colors.error[800],
       fontSize: '0.875rem',
       lineHeight: 1.5,
     },
@@ -104,15 +104,15 @@ export default function AccountDeletionPage() {
       justifyContent: 'center',
     },
     backButton: {
-      background: '#6366f1',
-      color: 'white',
+      background: gradients.primary,
+      color: colors.white,
       border: 'none',
       padding: '12px 24px',
-      borderRadius: '8px',
+      borderRadius: radius.md,
       fontSize: '1rem',
       fontWeight: 600,
       cursor: 'pointer',
-      transition: 'background-color 0.3s ease, transform 0.2s ease',
+      transition: 'all 0.3s ease',
       textDecoration: 'none',
       display: 'inline-block',
     },

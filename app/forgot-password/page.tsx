@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
+import { colors, gradients, shadows, radius } from '@/lib/theme';
 
 type Status = 'ready' | 'loading' | 'success' | 'error';
 
@@ -76,14 +77,14 @@ export default function ForgotPasswordPage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: gradients.hero_bg,
       padding: '20px',
     },
     container: {
-      background: 'white',
+      background: colors.white,
       padding: '3rem',
-      borderRadius: '16px',
-      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+      borderRadius: radius.xl,
+      boxShadow: shadows.xl,
       maxWidth: '500px',
       width: '100%',
       textAlign: 'center' as const,
@@ -96,11 +97,11 @@ export default function ForgotPasswordPage() {
     title: {
       fontSize: '2rem',
       fontWeight: 700,
-      color: '#1f2937',
+      color: colors.neutral[900],
       marginBottom: '1rem',
     },
     subtitle: {
-      color: '#6b7280',
+      color: colors.neutral[500],
       marginBottom: '2rem',
       lineHeight: 1.6,
     },
@@ -114,35 +115,38 @@ export default function ForgotPasswordPage() {
       display: 'block',
       marginBottom: '0.5rem',
       fontWeight: 500,
-      color: '#374151',
+      color: colors.neutral[600],
     },
     input: {
       width: '100%',
       padding: '12px',
-      border: '1px solid #d1d5db',
-      borderRadius: '8px',
+      border: `2px solid ${colors.neutral[200]}`,
+      borderRadius: radius.md,
       fontSize: '1rem',
       transition: 'border-color 0.3s ease',
       boxSizing: 'border-box' as const,
+      outline: 'none',
+      fontFamily: 'inherit',
     },
     submitButton: {
-      background: '#6366f1',
-      color: 'white',
+      background: gradients.primary,
+      color: colors.white,
       border: 'none',
       padding: '12px 24px',
-      borderRadius: '8px',
+      borderRadius: radius.md,
       fontSize: '1rem',
       fontWeight: 600,
       cursor: 'pointer',
       width: '100%',
-      transition: 'background-color 0.3s ease',
+      transition: 'all 0.3s ease',
+      fontFamily: 'inherit',
     },
     forgotSuccess: {
       textAlign: 'center' as const,
     },
     successIcon: {
       fontSize: '4rem',
-      color: '#10b981',
+      color: colors.success[500],
       marginBottom: '1rem',
     },
     forgotActions: {
@@ -153,7 +157,7 @@ export default function ForgotPasswordPage() {
     },
     btn: {
       padding: '12px 24px',
-      borderRadius: '8px',
+      borderRadius: radius.md,
       fontSize: '1rem',
       fontWeight: 600,
       cursor: 'pointer',
@@ -162,16 +166,17 @@ export default function ForgotPasswordPage() {
       display: 'inline-block',
       textAlign: 'center' as const,
       flex: 1,
+      fontFamily: 'inherit',
     },
     btnPrimary: {
-      background: '#6366f1',
-      color: 'white',
-      transition: 'background-color 0.3s ease',
+      background: gradients.primary,
+      color: colors.white,
+      transition: 'all 0.3s ease',
     },
     btnSecondary: {
       background: 'transparent',
-      color: '#6366f1',
-      border: '2px solid #6366f1',
+      color: colors.primary[500],
+      border: `2px solid ${colors.primary[500]}`,
       transition: 'all 0.3s ease',
     },
     forgotError: {
@@ -179,16 +184,16 @@ export default function ForgotPasswordPage() {
     },
     errorIcon: {
       fontSize: '4rem',
-      color: '#ef4444',
+      color: colors.error[500],
       marginBottom: '1rem',
     },
     messageBox: {
       marginBottom: '2rem',
       padding: '12px',
-      borderRadius: '8px',
-      background: '#fef2f2',
-      color: '#991b1b',
-      border: '1px solid #fecaca',
+      borderRadius: radius.md,
+      background: colors.error[50],
+      color: colors.error[800],
+      border: `1px solid ${colors.error[200]}`,
     },
   };
 
