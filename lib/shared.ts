@@ -1,4 +1,5 @@
-// Shared styles used across multiple components
+import { colors, gradients, radius } from './theme';
+
 export const sharedStyles = {
   container: {
     display: 'flex',
@@ -9,13 +10,13 @@ export const sharedStyles = {
     maxWidth: '600px',
     width: '100%',
   },
-  
+
   btn: {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
     padding: '12px 24px',
-    borderRadius: '8px',
+    borderRadius: radius.md,
     fontSize: '1rem',
     fontWeight: 600,
     textDecoration: 'none',
@@ -23,44 +24,47 @@ export const sharedStyles = {
     cursor: 'pointer',
     transition: 'all 0.2s ease-in-out',
     minHeight: '44px',
+    fontFamily: 'inherit',
   },
-  
+
   btnPrimary: {
-    backgroundColor: '#6366f1',
-    color: 'white',
+    background: gradients.primary,
+    color: colors.white,
   },
-  
+
   btnSecondary: {
     backgroundColor: 'transparent',
-    color: '#6366f1',
-    border: '2px solid #6366f1',
+    color: colors.primary[500],
+    border: `2px solid ${colors.primary[500]}`,
   },
-  
+
   input: {
     width: '100%',
     padding: '12px 16px',
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
+    border: `2px solid ${colors.neutral[200]}`,
+    borderRadius: radius.md,
     fontSize: '1rem',
     transition: 'border-color 0.2s ease-in-out',
+    fontFamily: 'inherit',
+    outline: 'none',
   },
-  
+
   label: {
     fontSize: '0.875rem',
     fontWeight: 600,
-    color: '#374151',
+    color: colors.neutral[600],
     marginBottom: '8px',
     display: 'block',
   },
-  
+
   error: {
-    color: '#ef4444',
+    color: colors.error[500],
     fontSize: '0.875rem',
     marginTop: '4px',
   },
-  
+
   success: {
-    color: '#10b981',
+    color: colors.success[500],
     fontSize: '0.875rem',
     marginTop: '4px',
   },
