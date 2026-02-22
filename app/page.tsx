@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
+import AppShowcase from '@/components/AppShowcase';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
@@ -26,6 +27,7 @@ export default function Home() {
       <main>
         <Hero />
         <Features />
+        <AppShowcase />
         <About />
         <Contact />
       </main>

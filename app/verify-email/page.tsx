@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useCallback, Suspense } from 'react
 import { useSearchParams, useRouter } from 'next/navigation';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { sharedStyles } from '@/lib/shared';
+import { colors, gradients, shadows, radius } from '@/lib/theme';
 
 type VerificationStatus = 'verifying' | 'success' | 'error';
 
@@ -17,23 +18,23 @@ function EmailVerificationLoading() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: gradients.hero_bg,
       padding: '20px',
     },
     container: {
       ...sharedStyles.container,
       textAlign: 'center' as const,
-      background: 'white',
-      borderRadius: '20px',
+      background: colors.white,
+      borderRadius: radius.xl,
       padding: '40px',
-      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+      boxShadow: shadows.xl,
       maxWidth: '500px',
       width: '100%',
     },
     title: {
       fontSize: '2rem',
       fontWeight: 700,
-      color: '#1f2937',
+      color: colors.neutral[900],
       marginBottom: '20px',
     },
   };
@@ -72,16 +73,16 @@ function EmailVerificationContent() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: gradients.hero_bg,
       padding: '20px',
     },
     container: {
       ...sharedStyles.container,
       textAlign: 'center' as const,
-      background: 'white',
-      borderRadius: '20px',
+      background: colors.white,
+      borderRadius: radius.xl,
       padding: '40px',
-      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+      boxShadow: shadows.xl,
       maxWidth: '500px',
       width: '100%',
     },
@@ -93,28 +94,28 @@ function EmailVerificationContent() {
     },
     loadingSpinner: {
       fontSize: '3rem',
-      color: '#6366f1',
+      color: colors.primary[500],
       animation: 'spin 1s linear infinite',
     },
     successIcon: {
       fontSize: '4rem',
-      color: '#10b981',
+      color: colors.success[500],
       marginBottom: '20px',
     },
     errorIcon: {
       fontSize: '4rem',
-      color: '#ef4444',
+      color: colors.error[500],
       marginBottom: '20px',
     },
     title: {
       fontSize: '2rem',
       fontWeight: 700,
-      color: '#1f2937',
+      color: colors.neutral[900],
       marginBottom: '20px',
     },
     message: {
       fontSize: '1.1rem',
-      color: '#6b7280',
+      color: colors.neutral[500],
       lineHeight: 1.6,
       marginBottom: '30px',
     },
@@ -134,8 +135,8 @@ function EmailVerificationContent() {
     },
     btnSecondary: {
       ...sharedStyles.btnSecondary,
-      color: '#6366f1',
-      border: '2px solid #6366f1',
+      color: colors.primary[500],
+      border: `2px solid ${colors.primary[500]}`,
     },
   };
 
@@ -191,7 +192,7 @@ function EmailVerificationContent() {
   };
 
   const handleGoToApp = (): void => {
-    window.location.href = 'localhost:3000';
+    window.location.href = '/';
   };
 
   const handleGoHome = (): void => {
