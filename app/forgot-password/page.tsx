@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { colors, gradients, shadows, radius } from '@/lib/theme';
+import Icon from '@/components/Icon';
 
 type Status = 'ready' | 'loading' | 'success' | 'error';
 
@@ -202,7 +203,7 @@ export default function ForgotPasswordPage() {
       return (
         <div style={styles.forgotSuccess}>
           <div style={styles.successIcon}>
-            <i className="fas fa-envelope-open"></i>
+            <Icon name="mail-open" size={56} />
           </div>
           <h2 style={styles.title}>Check Your Email</h2>
           <p style={styles.messageBox}>{message}</p>
@@ -228,7 +229,7 @@ export default function ForgotPasswordPage() {
       return (
         <div style={styles.forgotError}>
           <div style={styles.errorIcon}>
-            <i className="fas fa-exclamation-circle"></i>
+            <Icon name="error" size={56} />
           </div>
           <h2 style={styles.title}>Something Went Wrong</h2>
           <p style={styles.messageBox}>{message}</p>

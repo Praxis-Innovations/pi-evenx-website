@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { getPasswordStrengthResult, isPasswordStrongEnough } from '@/lib/passwordStrength';
 import { colors, gradients, shadows, radius } from '@/lib/theme';
+import Icon from '@/components/Icon';
 
 type ResetStatus = 'ready' | 'processing' | 'success' | 'error';
 
@@ -394,7 +395,7 @@ function ResetPasswordContent() {
       return (
         <div style={styles.resetSuccess}>
           <div style={styles.successIcon}>
-            <i className="fas fa-spinner fa-spin"></i>
+            <Icon name="spinner" size={56} className="icon-spin" />
           </div>
           <h2 style={styles.title}>Resetting Password</h2>
           <p style={styles.messageBox}>{message}</p>
@@ -406,7 +407,7 @@ function ResetPasswordContent() {
       return (
         <div style={styles.resetSuccess}>
           <div style={styles.successIcon}>
-            <i className="fas fa-check-circle"></i>
+            <Icon name="check-circle" size={56} />
           </div>
           <h2 style={styles.title}>Password Reset Successfully!</h2>
           <p style={styles.messageBox}>{message}</p>
@@ -432,7 +433,7 @@ function ResetPasswordContent() {
       return (
         <div style={styles.resetError}>
           <div style={styles.errorIcon}>
-            <i className="fas fa-exclamation-circle"></i>
+            <Icon name="error" size={56} />
           </div>
           <h2 style={styles.title}>Password Reset Failed</h2>
           <p style={styles.messageBox}>{message}</p>
@@ -481,7 +482,7 @@ function ResetPasswordContent() {
                 style={styles.passwordToggle}
                 onClick={() => setShowNewPassword(!showNewPassword)}
               >
-                <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                <Icon name={showNewPassword ? 'eye-slash' : 'eye'} size={18} />
               </button>
             </div>
             {formData.newPassword && (
@@ -529,7 +530,7 @@ function ResetPasswordContent() {
                 style={styles.passwordToggle}
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                <Icon name={showConfirmPassword ? 'eye-slash' : 'eye'} size={18} />
               </button>
             </div>
             {errors.confirmPassword && <div style={styles.error}>{errors.confirmPassword}</div>}

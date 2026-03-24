@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { sharedStyles } from '@/lib/shared';
 import { colors, gradients, shadows, radius } from '@/lib/theme';
+import Icon from '@/components/Icon';
 
 type VerificationStatus = 'verifying' | 'success' | 'error';
 
@@ -204,7 +205,7 @@ function EmailVerificationContent() {
       return (
         <div style={styles.loading}>
           <div style={styles.loadingSpinner}>
-            <i className="fas fa-spinner fa-spin"></i>
+            <Icon name="spinner" size={48} className="icon-spin" />
           </div>
           <h2 style={styles.title}>Verifying Your Email</h2>
           <p style={styles.message}>{message}</p>
@@ -216,17 +217,17 @@ function EmailVerificationContent() {
       return (
         <div style={styles.loading}>
           <div style={styles.successIcon}>
-            <i className="fas fa-check-circle"></i>
+            <Icon name="check-circle" size={56} />
           </div>
           <h2 style={styles.title}>Email Verified Successfully!</h2>
           <p style={styles.message}>{message}</p>
           <div style={styles.actions}>
             <button style={{ ...styles.btn, ...styles.btnPrimary }} onClick={handleGoToApp}>
-              <i className="fas fa-mobile-alt"></i>
+              <Icon name="mobile" size={18} />
               Open EvenX App
             </button>
             <button style={{ ...styles.btn, ...styles.btnSecondary }} onClick={handleGoHome}>
-              <i className="fas fa-home"></i>
+              <Icon name="home" size={18} />
               Go to EvenX Website
             </button>
           </div>
@@ -237,17 +238,17 @@ function EmailVerificationContent() {
     return (
       <div style={styles.loading}>
         <div style={styles.errorIcon}>
-          <i className="fas fa-exclamation-circle"></i>
+          <Icon name="error" size={56} />
         </div>
         <h2 style={styles.title}>Verification Failed</h2>
         <p style={styles.message}>{message}</p>
         <div style={styles.actions}>
           <button style={{ ...styles.btn, ...styles.btnPrimary }} onClick={handleRetry}>
-            <i className="fas fa-redo"></i>
+            <Icon name="redo" size={18} />
             Try Again
           </button>
           <button style={{ ...styles.btn, ...styles.btnSecondary }} onClick={handleGoHome}>
-            <i className="fas fa-home"></i>
+            <Icon name="home" size={18} />
             Go to EvenX Website
           </button>
         </div>
