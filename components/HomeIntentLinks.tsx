@@ -40,7 +40,7 @@ export default function HomeIntentLinks() {
               <p>{card.description}</p>
               <div className="teaser-link-row">
                 <Link href={card.href} className="inline-link">
-                  Read more
+                  Learn about {card.title}
                 </Link>
                 <Link href="/#contact" className="inline-link">
                   Ask a question
