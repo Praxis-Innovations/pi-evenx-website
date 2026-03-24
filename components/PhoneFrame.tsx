@@ -10,6 +10,7 @@ interface PhoneFrameProps {
   rotate_y?: number;
   rotate_x?: number;
   rotate_z?: number;
+  priority?: boolean;
 }
 
 /**
@@ -24,6 +25,7 @@ const PhoneFrame: React.FC<PhoneFrameProps> = ({
   rotate_y = 0,
   rotate_x = 0,
   rotate_z = 0,
+  priority = false,
 }) => {
   const has_rotation = rotate_y !== 0 || rotate_x !== 0 || rotate_z !== 0;
 
@@ -74,6 +76,7 @@ const PhoneFrame: React.FC<PhoneFrameProps> = ({
           src={src}
           alt={alt}
           fill
+          priority={priority}
           style={{ objectFit: 'cover', objectPosition: 'top' }}
           sizes={`${width}px`}
         />

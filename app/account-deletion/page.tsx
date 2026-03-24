@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { colors, gradients, shadows, radius } from '@/lib/theme';
+import Icon from '@/components/Icon';
 
 export default function AccountDeletionPage() {
   const styles = {
@@ -159,7 +160,7 @@ export default function AccountDeletionPage() {
 
         <div style={styles.warningBox}>
           <div style={styles.warningTitle}>
-            <i className="fas fa-exclamation-triangle"></i>
+            <Icon name="warning" size={18} />
             Important Notice
           </div>
           <p style={styles.warningText}>
