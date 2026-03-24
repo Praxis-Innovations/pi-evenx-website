@@ -1,203 +1,86 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import { colors } from '@/lib/theme';
+import { useEffect, useState } from 'react';
+import Icon from '@/components/Icon';
 
-interface NavbarProps {
-  isScrolled: boolean;
-}
+const navItems = [
+  { href: '/#features', label: 'Features' },
+  { href: '/#compare', label: 'Use Cases' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/#contact', label: 'Contact' },
+] as const;
 
-const Navbar: React.FC<NavbarProps> = ({ isScrolled }) => {
-  const [is_menu_open, setIsMenuOpen] = useState<boolean>(false);
-  const [window_width, setWindowWidth] = useState<number>(0);
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    setWindowWidth(window.innerWidth);
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 24);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const toggleMenu = (): void => {
-    setIsMenuOpen(!is_menu_open);
-  };
-
-  const closeMenu = (): void => {
-    setIsMenuOpen(false);
-  };
-
-  const scrollToSection = (section_id: string): void => {
-    const element = document.getElementById(section_id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    closeMenu();
-  };
-
-  const styles = {
-    navbar: {
-      position: 'fixed' as const,
-      top: 0,
-      width: '100%',
-      background: isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)',
-      backdropFilter: 'blur(10px)',
-      zIndex: 1000,
-      padding: '0.75rem 0',
-      transition: 'all 0.3s ease',
-      boxShadow: isScrolled ? '0 2px 20px rgba(0, 0, 0, 0.08)' : 'none',
-    },
-    container: {
-      maxWidth: '1200px',
-      margin: '0 auto',
-      padding: '0 20px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    logo: {
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '1.5rem',
-      fontWeight: 700,
-      color: colors.primary[500],
-      fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
-    },
-    menu: {
-      display: 'flex',
-      listStyle: 'none' as const,
-      gap: '2rem',
-      margin: 0,
-      padding: 0,
-    },
-    nav_link: {
-      background: 'none',
-      border: 'none',
-      textDecoration: 'none',
-      color: colors.neutral[600],
-      fontWeight: 500,
-      transition: 'color 0.3s ease',
-      cursor: 'pointer',
-      fontFamily: 'inherit',
-      fontSize: '1rem',
-    },
-    hamburger: {
-      display: 'flex',
-      flexDirection: 'column' as const,
-      cursor: 'pointer',
-      background: 'none',
-      border: 'none',
-      padding: '8px',
-      borderRadius: '4px',
-      transition: 'all 0.3s ease',
-    },
-    bar: {
-      width: '25px',
-      height: '3px',
-      background: colors.neutral[600],
-      margin: '3px 0',
-      transition: '0.3s ease',
-      borderRadius: '2px',
-    },
-    mobile_menu: {
-      position: 'fixed' as const,
-      left: is_menu_open ? 0 : '-100%',
-      top: '70px',
-      flexDirection: 'column' as const,
-      backgroundColor: 'rgba(255, 255, 255, 0.98)',
-      backdropFilter: 'blur(10px)',
-      width: '100%',
-      textAlign: 'center' as const,
-      transition: '0.3s ease',
-      boxShadow: '0 10px 27px rgba(0, 0, 0, 0.08)',
-      padding: '2rem 0',
-      display: 'flex',
-      listStyle: 'none' as const,
-      margin: 0,
-      zIndex: 999,
-    },
-    mobile_link: {
-      background: 'none',
-      border: 'none',
-      textDecoration: 'none',
-      color: colors.neutral[600],
-      fontWeight: 600,
-      transition: 'all 0.3s ease',
-      cursor: 'pointer',
-      fontFamily: 'inherit',
-      fontSize: '1.1rem',
-      padding: '0.75rem 2rem',
-      borderRadius: '8px',
-      display: 'block',
-      width: '100%',
-    },
-  };
-
-  const is_ready = window_width > 0;
+  useEffect(() => {
+    const closeMenu = () => setIsMenuOpen(false);
+    window.addEventListener('hashchange', closeMenu);
+    return () => window.removeEventListener('hashchange', closeMenu);
+  }, []);
 
   return (
-    <nav style={{ ...styles.navbar, visibility: is_ready ? 'visible' : 'hidden' }}>
-      <div style={styles.container}>
-        <div style={styles.logo}>
-          <Image src="/evenx-logo.png" alt="EvenX logo" width={28} height={28} style={{ marginRight: '0.5rem' }} />
+    <header className={`site-header${isScrolled ? ' scrolled' : ''}`}>
+      <div className="site-container site-nav">
+        <Link href="/" className="site-brand" aria-label="EvenX home">
+          <Image src="/evenx-logo.png" alt="EvenX logo" width={30} height={30} />
           <span>EvenX</span>
-        </div>
+        </Link>
 
-        {window_width > 768 && (
-          <ul style={styles.menu}>
-            {['Home', 'Features', 'About', 'Contact'].map((item) => (
-              <li key={item} style={{ listStyle: 'none' }}>
-                <button
-                  onClick={() => scrollToSection(item.toLowerCase())}
-                  style={styles.nav_link}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = colors.primary[500])}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = colors.neutral[600])}
-                >
-                  {item}
-                </button>
+        <nav aria-label="Primary">
+          <ul className="nav-links">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="nav-link">
+                  {item.label}
+                </Link>
               </li>
             ))}
+            <li>
+              <Link href="/split-bills-app" className="nav-link">
+                Split Bills App
+              </Link>
+            </li>
           </ul>
-        )}
+        </nav>
 
-        {window_width <= 768 && (
-          <div
-            style={styles.hamburger}
-            onClick={toggleMenu}
-            onMouseEnter={(e) => (e.currentTarget.style.background = `${colors.primary[500]}10`)}
-            onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
-          >
-            <span style={{ ...styles.bar, transform: is_menu_open ? 'translateY(8px) rotate(45deg)' : 'none' }} />
-            <span style={{ ...styles.bar, opacity: is_menu_open ? 0 : 1 }} />
-            <span style={{ ...styles.bar, transform: is_menu_open ? 'translateY(-8px) rotate(-45deg)' : 'none' }} />
-          </div>
-        )}
+        <button
+          type="button"
+          className="nav-menu-button"
+          aria-expanded={isMenuOpen}
+          aria-label="Toggle menu"
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <Icon name="mobile" size={22} />
+        </button>
       </div>
 
-      {window_width <= 768 && (
-        <ul style={styles.mobile_menu}>
-          {['Home', 'Features', 'About', 'Contact'].map((item) => (
-            <li key={item} style={{ margin: '1rem 0' }}>
-              <button
-                onClick={() => scrollToSection(item.toLowerCase())}
-                style={styles.mobile_link}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = `${colors.primary[500]}10`;
-                  e.currentTarget.style.color = colors.primary[500];
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = colors.neutral[600];
-                }}
-              >
-                {item}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </nav>
+      <nav aria-label="Mobile" className={`mobile-nav${isMenuOpen ? ' open' : ''}`}>
+        {navItems.map((item) => (
+          <Link key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)}>
+            {item.label}
+          </Link>
+        ))}
+        <Link href="/split-bills-app" onClick={() => setIsMenuOpen(false)}>
+          Split Bills App
+        </Link>
+        <Link href="/expense-splitting-app" onClick={() => setIsMenuOpen(false)}>
+          Expense Splitting App
+        </Link>
+      </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}

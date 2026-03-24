@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { colors, gradients, shadows, radius } from '@/lib/theme';
+import Icon from '@/components/Icon';
 
 interface FormData {
   name: string;
@@ -329,7 +330,7 @@ const Contact: React.FC = () => {
                 />
                 {errors.name && (
                   <div style={styles.error_text}>
-                    <i className="fas fa-exclamation-circle" />
+                    <Icon name="error" size={16} />
                     {errors.name}
                   </div>
                 )}
@@ -362,7 +363,7 @@ const Contact: React.FC = () => {
                 />
                 {errors.email && (
                   <div style={styles.error_text}>
-                    <i className="fas fa-exclamation-circle" />
+                    <Icon name="error" size={16} />
                     {errors.email}
                   </div>
                 )}
@@ -395,7 +396,7 @@ const Contact: React.FC = () => {
                 />
                 {errors.subject && (
                   <div style={styles.error_text}>
-                    <i className="fas fa-exclamation-circle" />
+                    <Icon name="error" size={16} />
                     {errors.subject}
                   </div>
                 )}
@@ -429,7 +430,7 @@ const Contact: React.FC = () => {
                 />
                 {errors.message && (
                   <div style={styles.error_text}>
-                    <i className="fas fa-exclamation-circle" />
+                    <Icon name="error" size={16} />
                     {errors.message}
                   </div>
                 )}
@@ -456,7 +457,7 @@ const Contact: React.FC = () => {
                   e.currentTarget.style.boxShadow = shadows.primary_md;
                 }}
               >
-                <i className="fas fa-paper-plane" style={{ marginRight: '8px' }} />
+                <Icon name="paper-plane" size={16} style={{ marginRight: '8px' }} />
                 {is_submitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
