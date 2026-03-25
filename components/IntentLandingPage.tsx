@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PhoneFrame from '@/components/PhoneFrame';
 import Icon from '@/components/Icon';
 import { store_urls } from '@/lib/theme';
+import styles from '@/components/IntentLandingPage.module.css';
 
 type IntentLandingPageProps = {
   eyebrow: string;
@@ -28,10 +29,10 @@ export default function IntentLandingPage({
   relatedLinks,
 }: IntentLandingPageProps) {
   return (
-    <main className="intent-page">
-      <div className="site-container intent-stack">
-        <section className="intent-hero-grid">
-          <div className="intent-hero-copy">
+    <main className={styles.page}>
+      <div className={`site-container ${styles.stack}`}>
+        <section className={styles.heroGrid}>
+          <div className={styles.heroCopy}>
             <div className="eyebrow">
               <Icon name="bolt" size={14} />
               {eyebrow}
@@ -76,7 +77,7 @@ export default function IntentLandingPage({
           </div>
         </section>
 
-        <section className="intent-surface">
+        <section className={styles.surface}>
           <h2>Why EvenX fits this use case</h2>
           <p>{intro}</p>
           <ul>
@@ -86,7 +87,7 @@ export default function IntentLandingPage({
           </ul>
         </section>
 
-        <section className="intent-surface">
+        <section className={styles.surface}>
           <h2>Common use cases</h2>
           <ul>
             {useCases.map((useCase) => (
@@ -95,13 +96,13 @@ export default function IntentLandingPage({
           </ul>
         </section>
 
-        <section className="intent-cta-band">
+        <section className={styles.ctaBand}>
           <h2 style={{ color: 'var(--color-neutral-900)' }}>Explore related EvenX pages</h2>
           <p style={{ color: 'var(--color-neutral-600)', marginTop: '0.45rem' }}>
             These internal pages cover closely related bill-splitting searches and help you
             compare how EvenX handles each scenario.
           </p>
-          <div className="cross-link-row" style={{ marginTop: '1rem' }}>
+          <div className={styles.crossLinkRow} style={{ marginTop: '1rem' }}>
             <Link href="/" className="inline-link">
               Homepage
             </Link>
