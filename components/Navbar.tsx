@@ -50,8 +50,8 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <Link href="/split-bills-app" className="nav-link">
-                Split Bills App
+              <Link href="/split-expenses" className="nav-link nav-link-button">
+                Split Calculator
               </Link>
             </li>
           </ul>
@@ -74,8 +74,12 @@ export default function Navbar() {
             {item.label}
           </Link>
         ))}
-        <Link href="/split-bills-app" onClick={() => setIsMenuOpen(false)}>
-          Split Bills App
+        <Link
+          href="/split-expenses"
+          className="mobile-nav-cta"
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Split Calculator
         </Link>
         <Link href="/expense-splitting-app" onClick={() => setIsMenuOpen(false)}>
           Expense Splitting App

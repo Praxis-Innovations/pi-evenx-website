@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { colors, store_urls } from '@/lib/theme';
 import PhoneFrame from '@/components/PhoneFrame';
 import Icon from '@/components/Icon';
@@ -46,6 +47,13 @@ export default function Hero() {
                 <strong>Google Play</strong>
               </span>
             </a>
+            <Link href="/split-expenses" className="store-button">
+              <Icon name="calculator" size={24} />
+              <span className="store-button-copy">
+                <small>Try the free</small>
+                <strong>Expense Calculator</strong>
+              </span>
+            </Link>
           </div>
 
           <div className="hero-trust-row">
