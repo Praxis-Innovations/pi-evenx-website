@@ -3,6 +3,7 @@ import { absoluteUrl } from '@/lib/seo';
 
 const routes = [
   '/',
+  '/split-expenses',
   '/split-bills-app',
   '/expense-splitting-app',
   '/shared-expense-tracker',

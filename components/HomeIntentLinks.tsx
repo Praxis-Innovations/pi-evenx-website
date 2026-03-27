@@ -2,6 +2,12 @@ import Link from 'next/link';
 
 const cards = [
   {
+    href: '/split-expenses',
+    title: 'Split Expenses Calculator',
+    description:
+      'For users who want a fast browser tool to split bills instantly with equal, custom, or ratio-based splits.',
+  },
+  {
     href: '/split-bills-app',
     title: 'Split Bills App',
     description:
@@ -40,7 +46,7 @@ export default function HomeIntentLinks() {
               <p>{card.description}</p>
               <div className="teaser-link-row">
                 <Link href={card.href} className="inline-link">
-                  Learn about {card.title}
+                  Open {card.title}
                 </Link>
                 <Link href="/#contact" className="inline-link">
                   Ask a question
