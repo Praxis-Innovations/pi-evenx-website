@@ -28,6 +28,7 @@ type MetadataInput = {
   description: string;
   path?: string;
   robots?: Metadata['robots'];
+  keywords?: string[];
 };
 
 export function absoluteUrl(path = '/') {
@@ -39,13 +40,14 @@ export function buildMetadata({
   description,
   path = '/',
   robots,
+  keywords = [],
 }: MetadataInput): Metadata {
   const canonical = absoluteUrl(path);
 
   return {
     title,
     description,
-    keywords: [...siteConfig.keywords],
+    keywords: [...siteConfig.keywords, ...keywords],
     alternates: {
       canonical,
     },
@@ -141,11 +143,13 @@ export function buildSoftwareApplicationJsonLd() {
   };
 }
 
-export function buildFaqJsonLd() {
+export function buildFaqJsonLd(
+  items: ReadonlyArray<{ question: string; answer: string }> = faqItems,
+) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqItems.map((item) => ({
+    mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {

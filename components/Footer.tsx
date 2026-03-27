@@ -29,6 +29,7 @@ export default function Footer() {
 
           <div className="footer-column">
             <h3>Search Pages</h3>
+            <Link href="/split-expenses">Split Expenses Calculator</Link>
             <Link href="/split-bills-app">Split Bills App</Link>
             <Link href="/expense-splitting-app">Expense Splitting App</Link>
             <Link href="/shared-expense-tracker">Shared Expense Tracker</Link>

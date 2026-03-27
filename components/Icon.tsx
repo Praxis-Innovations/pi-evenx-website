@@ -5,6 +5,7 @@ export type IconName =
   | 'google-play'
   | 'shield'
   | 'mobile'
+  | 'plus'
   | 'check'
   | 'users'
   | 'bolt'
@@ -22,7 +23,9 @@ export type IconName =
   | 'eye'
   | 'eye-slash'
   | 'home'
-  | 'redo';
+  | 'redo'
+  | 'trash'
+  | 'chevron-down';
 
 type IconProps = {
   name: IconName;
@@ -51,6 +54,8 @@ function iconPath(name: IconName) {
       return <path fill="currentColor" d="M12 2 4 5v5.5c0 4.8 3.4 9.3 8 10.5 4.6-1.2 8-5.7 8-10.5V5l-8-3Zm-1.1 13.8-3.7-3.7 1.4-1.4 2.3 2.3 4.5-4.5 1.4 1.4-5.9 5.9Z" />;
     case 'mobile':
       return <path fill="currentColor" d="M8 2h8a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3Zm4 18.25a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM7 16h10V6H7v10Z" />;
+    case 'plus':
+      return <path fill="currentColor" d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6V5Z" />;
     case 'check':
       return <path fill="currentColor" d="m9.55 18.3-5.5-5.5 1.4-1.4 4.1 4.08 8.98-8.98 1.42 1.4-10.4 10.4Z" />;
     case 'users':
@@ -87,6 +92,10 @@ function iconPath(name: IconName) {
       return <path fill="currentColor" d="M12 3 2 12h3v8h6v-5h2v5h6v-8h3L12 3Z" />;
     case 'redo':
       return <path fill="currentColor" d="M12 5a7 7 0 0 1 6.58 4.63l1.9-.66A9 9 0 0 0 4.55 8H2l3 3 3-3H6.54A7 7 0 0 1 12 5Zm7 8-3 3h1.46A7 7 0 0 1 5.42 14.37l-1.9.66A9 9 0 0 0 19.45 16H21l-2-3Z" />;
+    case 'trash':
+      return <path fill="currentColor" d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 6h2v8h-2V9Zm4 0h2v8h-2V9ZM7 9h2v8H7V9Zm-1 12a2 2 0 0 1-2-2V8h16v11a2 2 0 0 1-2 2H6Z" />;
+    case 'chevron-down':
+      return <path fill="currentColor" d="m7.4 9.4 4.6 4.6 4.6-4.6 1.4 1.4-6 6-6-6 1.4-1.4Z" />;
   }
 }
 
