@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import SeoJsonLd from '@/components/SeoJsonLd';
 import SplitExpensesTool from '@/components/SplitExpensesTool';
 import styles from '@/components/SplitExpensesTool.module.css';
-import { absoluteUrl, buildMetadata } from '@/lib/seo';
+import { absoluteUrl, buildBreadcrumbJsonLd, buildHowToJsonLd, buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Split Expenses Calculator',
@@ -42,6 +42,11 @@ export default function SplitExpensesPage() {
   return (
     <>
       <SeoJsonLd data={buildWebApplicationJsonLd()} />
+      <SeoJsonLd data={buildHowToJsonLd()} />
+      <SeoJsonLd data={buildBreadcrumbJsonLd([
+        { name: 'Home', path: '/' },
+        { name: 'Split Expenses Calculator', path: '/split-expenses' },
+      ])} />
 
       <main className={styles.page}>
         <div className={`site-container ${styles.pageShell}`}>

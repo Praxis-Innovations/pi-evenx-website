@@ -33,57 +33,95 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`site-header${isScrolled ? ' scrolled' : ''}`}>
-      <div className="site-container site-nav">
-        <Link href="/" className="site-brand" aria-label="EvenX home">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl transition-shadow duration-300 ${
+        isScrolled ? 'shadow-nav' : ''
+      }`}
+    >
+      <div className="site-container flex items-center justify-between h-16">
+        {/* Logo */}
+        <Link
+          href="/"
+          className="flex items-center gap-2.5 no-underline"
+          aria-label="EvenX home"
+        >
           <Image src="/evenx-logo.png" alt="EvenX logo" width={30} height={30} />
-          <span>EvenX</span>
+          <span className="text-lg font-extrabold text-slate-900 tracking-tight">
+            EvenX
+          </span>
         </Link>
 
-        <nav aria-label="Primary">
-          <ul className="nav-links">
+        {/* Desktop nav */}
+        <nav aria-label="Primary" className="hidden md:block">
+          <ul className="flex items-center gap-1 list-none m-0 p-0">
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="nav-link">
+                <Link
+                  href={item.href}
+                  className="px-3.5 py-2 text-sm font-semibold text-slate-600 rounded-lg
+                             hover:text-primary-600 hover:bg-primary-50
+                             transition-colors duration-200 no-underline"
+                >
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/split-expenses" className="nav-link nav-link-button">
+              <Link
+                href="/split-expenses"
+                className="ml-2 px-4 py-2 text-sm font-bold text-white rounded-lg
+                           bg-gradient-primary shadow-primary-sm
+                           hover:shadow-primary-md hover:-translate-y-0.5
+                           transition-all duration-200 no-underline"
+              >
                 Split Calculator
               </Link>
             </li>
           </ul>
         </nav>
 
+        {/* Mobile hamburger */}
         <button
           type="button"
-          className="nav-menu-button"
+          className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg
+                     text-slate-700 hover:bg-slate-100 transition-colors duration-200"
           aria-expanded={isMenuOpen}
           aria-label="Toggle menu"
           onClick={() => setIsMenuOpen((open) => !open)}
         >
-          <Icon name="mobile" size={22} />
+          <Icon name={isMenuOpen ? 'close' : 'menu'} size={22} />
         </button>
       </div>
 
-      <nav aria-label="Mobile" className={`mobile-nav${isMenuOpen ? ' open' : ''}`}>
-        {navItems.map((item) => (
-          <Link key={item.href} href={item.href} onClick={() => setIsMenuOpen(false)}>
-            {item.label}
+      {/* Mobile menu */}
+      <nav
+        aria-label="Mobile"
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="site-container flex flex-col gap-1 pb-5 pt-2">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="px-4 py-3 text-sm font-semibold text-slate-700 rounded-lg
+                         hover:bg-primary-50 hover:text-primary-600
+                         transition-colors duration-200 no-underline"
+            >
+              {item.label}
+            </Link>
+          ))}
+          <Link
+            href="/split-expenses"
+            onClick={() => setIsMenuOpen(false)}
+            className="mt-2 px-4 py-3 text-sm font-bold text-white text-center rounded-lg
+                       bg-gradient-primary shadow-primary-sm no-underline"
+          >
+            Split Calculator
           </Link>
-        ))}
-        <Link
-          href="/split-expenses"
-          className="mobile-nav-cta"
-          onClick={() => setIsMenuOpen(false)}
-        >
-          Split Calculator
-        </Link>
-        <Link href="/expense-splitting-app" onClick={() => setIsMenuOpen(false)}>
-          Expense Splitting App
-        </Link>
+        </div>
       </nav>
     </header>
   );

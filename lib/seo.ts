@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { store_urls } from '@/lib/theme';
+import { store_urls } from '@/lib/constants';
 
 export const siteConfig = {
   name: 'EvenX',
@@ -15,6 +15,9 @@ export const siteConfig = {
     'roommate bill splitter',
     'trip expense app',
     'group expense tracker',
+    'bill splitting calculator',
+    'split rent app',
+    'shared expenses app',
   ],
   organization: {
     name: 'EvenX',
@@ -98,6 +101,26 @@ export const faqItems = [
     answer:
       'Yes. EvenX is available on both iOS and Android, so groups can track shared expenses across devices.',
   },
+  {
+    question: 'Is EvenX free to use?',
+    answer:
+      'Yes. EvenX is free to download and use. You can create groups, add expenses, and settle balances at no cost.',
+  },
+  {
+    question: 'How does EvenX calculate who owes what?',
+    answer:
+      'EvenX automatically calculates net balances based on all recorded expenses and payments. It uses a settlement minimization algorithm to reduce the number of transfers needed to settle up.',
+  },
+  {
+    question: 'Can I use EvenX for recurring monthly expenses like rent and utilities?',
+    answer:
+      'Yes. Many roommates use EvenX to track recurring shared costs like rent, utilities, groceries, and subscriptions. Just add each expense as it comes up and EvenX keeps a running tally.',
+  },
+  {
+    question: 'How do I settle up with friends using EvenX?',
+    answer:
+      'EvenX shows you the minimum number of payments needed to settle all balances in a group. Once you pay someone outside the app, you can mark the balance as settled.',
+  },
 ] as const;
 
 export function buildWebsiteJsonLd() {
@@ -157,5 +180,52 @@ export function buildFaqJsonLd(
         text: item.answer,
       },
     })),
+  };
+}
+
+export function buildBreadcrumbJsonLd(
+  items: Array<{ name: string; path: string }>,
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+export function buildHowToJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Split Expenses with the EvenX Calculator',
+    description:
+      'Use the free EvenX split expenses calculator to divide bills evenly, by custom amounts, or by ratio among any number of people.',
+    step: [
+      {
+        '@type': 'HowToStep',
+        name: 'Add people',
+        text: 'Enter the names of everyone sharing the expense.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Add expenses',
+        text: 'Enter each expense with the amount and who paid.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'Choose split type',
+        text: 'Select even split, custom amounts, or ratio-based splitting.',
+      },
+      {
+        '@type': 'HowToStep',
+        name: 'View settlements',
+        text: 'See exactly who owes whom and how much to settle up.',
+      },
+    ],
   };
 }

@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
-import { colors, gradients, shadows, radius } from '@/lib/theme';
 import Icon from '@/components/Icon';
 
 interface FormData {
@@ -20,26 +19,6 @@ interface FormErrors {
 }
 
 const Contact: React.FC = () => {
-  const form_palette = {
-    card_bg: '#f8fafc',
-    card_border: '#e2e8f0',
-    card_text: '#0f172a',
-    card_muted_text: '#475569',
-    field_bg: '#ffffff',
-    field_border: '#cbd5e1',
-    field_text: '#0f172a',
-    field_placeholder: '#64748b',
-    focus_border: colors.primary[500],
-    focus_ring: '0 0 0 4px rgba(99, 102, 241, 0.2)',
-    label_text: '#1e293b',
-    success_bg: '#f0fdf4',
-    success_border: '#86efac',
-    success_text: '#166534',
-    error_bg: '#fef2f2',
-    error_border: '#fecaca',
-    error_text: '#b91c1c',
-  } as const;
-
   const [form_data, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -150,286 +129,118 @@ const Contact: React.FC = () => {
     }
   };
 
-  const input_base: React.CSSProperties = {
-    width: '100%',
-    padding: '13px 16px',
-    border: `1px solid ${form_palette.field_border}`,
-    borderRadius: radius.lg,
-    fontSize: '0.96rem',
-    transition: 'all 0.3s ease',
-    backgroundColor: form_palette.field_bg,
-    color: form_palette.field_text,
-    boxSizing: 'border-box',
-    fontFamily: 'inherit',
-    outline: 'none',
-    lineHeight: 1.5,
-  };
-
-  const styles = {
-    section: {
-      padding: '70px 0',
-      background: gradients.dark_section,
-      position: 'relative' as const,
-      overflow: 'hidden',
-    },
-    container: {
-      maxWidth: '1100px',
-      margin: '0 auto',
-      padding: '0 30px',
-      position: 'relative' as const,
-      zIndex: 2,
-    },
-    title: {
-      textAlign: 'center' as const,
-      fontSize: 'clamp(1.8rem, 4.5vw, 2.5rem)',
-      fontWeight: 800,
-      color: colors.white,
-      marginBottom: '0.8rem',
-      lineHeight: 1.1,
-      fontFamily: 'var(--font-plus-jakarta-sans), sans-serif',
-    },
-    subtitle: {
-      textAlign: 'center' as const,
-      color: colors.neutral[200],
-      fontSize: '1rem',
-      marginBottom: '2.2rem',
-      maxWidth: '560px',
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-    form_wrapper: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: '2rem',
-    },
-    form: {
-      background: form_palette.card_bg,
-      padding: '2.1rem',
-      borderRadius: radius.xl,
-      boxShadow: '0 24px 44px rgba(2, 6, 23, 0.35)',
-      border: `1px solid ${form_palette.card_border}`,
-      position: 'relative' as const,
-      maxWidth: '600px',
-      width: '100%',
-    },
-    form_headline: {
-      color: form_palette.card_text,
-      fontWeight: 700,
-      fontSize: '1.1rem',
-      marginBottom: '0.35rem',
-    },
-    form_description: {
-      color: form_palette.card_muted_text,
-      fontSize: '0.92rem',
-      marginBottom: '1.25rem',
-    },
-    group: {
-      marginBottom: '1.05rem',
-    },
-    label: {
-      display: 'block',
-      marginBottom: '0.4rem',
-      fontWeight: 600,
-      color: form_palette.label_text,
-      fontSize: '0.82rem',
-      textTransform: 'uppercase' as const,
-      letterSpacing: '0.6px',
-    },
-    error_text: {
-      color: form_palette.error_text,
-      fontSize: '0.8rem',
-      marginTop: '0.4rem',
-      fontWeight: 500,
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.4rem',
-    },
-    submit: {
-      background: gradients.primary,
-      color: colors.white,
-      border: 'none',
-      padding: '16px 28px',
-      borderRadius: radius.lg,
-      fontSize: '1rem',
-      fontWeight: 700,
-      cursor: 'pointer',
-      width: '100%',
-      transition: 'all 0.3s ease',
-      letterSpacing: '0.3px',
-      boxShadow: shadows.primary_md,
-      position: 'relative' as const,
-      fontFamily: 'inherit',
-      marginTop: '0.35rem',
-    },
-    msg_box: {
-      padding: '12px 16px',
-      borderRadius: radius.md,
-      marginBottom: '1rem',
-      textAlign: 'center' as const,
-      fontWeight: 500,
-      fontSize: '0.9rem',
-    },
-    msg_success: {
-      background: form_palette.success_bg,
-      color: form_palette.success_text,
-      border: `1px solid ${form_palette.success_border}`,
-    },
-    msg_error: {
-      background: form_palette.error_bg,
-      color: form_palette.error_text,
-      border: `1px solid ${form_palette.error_border}`,
-    },
-  };
-
   return (
-    <section id="contact" style={styles.section}>
-      <div style={styles.container}>
-        <h2 style={styles.title}>Get in Touch</h2>
-        <p style={styles.subtitle}>Have a question, feedback, or partnership idea? Send us a message and our team will reply soon.</p>
-        <div style={styles.form_wrapper}>
-          <div style={styles.form}>
-            <p style={styles.form_headline}>Contact Form</p>
-            <p style={styles.form_description}>Fill in the details below and press send.</p>
+    <section id="contact" className="bg-gradient-dark py-20 relative overflow-hidden">
+      <div className="max-w-site mx-auto px-8 relative z-[2]">
+        <h2 className="text-center text-[clamp(1.8rem,4.5vw,2.5rem)] font-extrabold text-white mb-3 leading-tight font-sans">
+          Get in Touch
+        </h2>
+        <p className="text-center text-neutral-200 text-base mb-9 max-w-[560px] mx-auto">
+          Have a question, feedback, or partnership idea? Send us a message and our team will reply soon.
+        </p>
+        <div className="flex justify-center items-center">
+          <div className="bg-slate-50 p-8 rounded-2xl shadow-2xl border border-slate-200 max-w-[600px] w-full">
+            <p className="text-slate-900 font-bold text-lg mb-1">Contact Form</p>
+            <p className="text-slate-500 text-sm mb-5">Fill in the details below and press send.</p>
+
             {message && (
               <div
-                style={{
-                  ...styles.msg_box,
-                  ...(message_type === 'success' ? styles.msg_success : styles.msg_error),
-                }}
+                className={`p-3 rounded-md mb-4 text-center font-medium text-sm ${
+                  message_type === 'success'
+                    ? 'bg-green-50 text-green-800 border border-green-200'
+                    : 'bg-red-50 text-red-700 border border-red-200'
+                }`}
               >
                 {message}
               </div>
             )}
 
             <form onSubmit={handleSubmit}>
-              <div style={styles.group}>
-                <label htmlFor="name" style={styles.label}>
+              <div className="mb-4">
+                <label htmlFor="name" className="block mb-1.5 font-semibold text-slate-800 text-xs uppercase tracking-wider">
                   Name
                 </label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  className="contact_field"
+                  className={`contact_field w-full py-3 px-4 border rounded-xl text-base bg-white outline-none transition-all font-[inherit] ${
+                    errors.name ? 'border-red-500' : 'border-slate-300'
+                  }`}
                   placeholder="Enter your name"
                   value={form_data.name}
                   onChange={handleInputChange}
-                  style={{
-                    ...input_base,
-                    borderColor: errors.name ? colors.error[500] : undefined,
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = form_palette.focus_border;
-                    e.currentTarget.style.boxShadow = form_palette.focus_ring;
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = errors.name ? colors.error[500] : form_palette.field_border;
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
                 />
                 {errors.name && (
-                  <div style={styles.error_text}>
+                  <div className="text-red-700 text-sm mt-1.5 flex items-center gap-1.5">
                     <Icon name="error" size={16} />
                     {errors.name}
                   </div>
                 )}
               </div>
 
-              <div style={styles.group}>
-                <label htmlFor="email" style={styles.label}>
+              <div className="mb-4">
+                <label htmlFor="email" className="block mb-1.5 font-semibold text-slate-800 text-xs uppercase tracking-wider">
                   Email
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  className="contact_field"
+                  className={`contact_field w-full py-3 px-4 border rounded-xl text-base bg-white outline-none transition-all font-[inherit] ${
+                    errors.email ? 'border-red-500' : 'border-slate-300'
+                  }`}
                   placeholder="Enter your email address"
                   value={form_data.email}
                   onChange={handleInputChange}
-                  style={{
-                    ...input_base,
-                    borderColor: errors.email ? colors.error[500] : undefined,
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = form_palette.focus_border;
-                    e.currentTarget.style.boxShadow = form_palette.focus_ring;
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = errors.email ? colors.error[500] : form_palette.field_border;
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
                 />
                 {errors.email && (
-                  <div style={styles.error_text}>
+                  <div className="text-red-700 text-sm mt-1.5 flex items-center gap-1.5">
                     <Icon name="error" size={16} />
                     {errors.email}
                   </div>
                 )}
               </div>
 
-              <div style={styles.group}>
-                <label htmlFor="subject" style={styles.label}>
+              <div className="mb-4">
+                <label htmlFor="subject" className="block mb-1.5 font-semibold text-slate-800 text-xs uppercase tracking-wider">
                   Subject
                 </label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  className="contact_field"
+                  className={`contact_field w-full py-3 px-4 border rounded-xl text-base bg-white outline-none transition-all font-[inherit] ${
+                    errors.subject ? 'border-red-500' : 'border-slate-300'
+                  }`}
                   placeholder="Enter subject"
                   value={form_data.subject}
                   onChange={handleInputChange}
-                  style={{
-                    ...input_base,
-                    borderColor: errors.subject ? colors.error[500] : undefined,
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = form_palette.focus_border;
-                    e.currentTarget.style.boxShadow = form_palette.focus_ring;
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = errors.subject ? colors.error[500] : form_palette.field_border;
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
                 />
                 {errors.subject && (
-                  <div style={styles.error_text}>
+                  <div className="text-red-700 text-sm mt-1.5 flex items-center gap-1.5">
                     <Icon name="error" size={16} />
                     {errors.subject}
                   </div>
                 )}
               </div>
 
-              <div style={styles.group}>
-                <label htmlFor="message" style={styles.label}>
+              <div className="mb-4">
+                <label htmlFor="message" className="block mb-1.5 font-semibold text-slate-800 text-xs uppercase tracking-wider">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  className="contact_field"
+                  className={`contact_field w-full py-3 px-4 border rounded-xl text-base bg-white outline-none transition-all font-[inherit] min-h-[140px] resize-y ${
+                    errors.message ? 'border-red-500' : 'border-slate-300'
+                  }`}
                   placeholder="Enter your message"
                   value={form_data.message}
                   onChange={handleInputChange}
-                  style={{
-                    ...input_base,
-                    minHeight: '140px',
-                    resize: 'vertical' as const,
-                    borderColor: errors.message ? colors.error[500] : undefined,
-                  }}
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderColor = form_palette.focus_border;
-                    e.currentTarget.style.boxShadow = form_palette.focus_ring;
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderColor = errors.message ? colors.error[500] : form_palette.field_border;
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
                 />
                 {errors.message && (
-                  <div style={styles.error_text}>
+                  <div className="text-red-700 text-sm mt-1.5 flex items-center gap-1.5">
                     <Icon name="error" size={16} />
                     {errors.message}
                   </div>
@@ -438,24 +249,8 @@ const Contact: React.FC = () => {
 
               <button
                 type="submit"
-                style={{
-                  ...styles.submit,
-                  opacity: is_submitting ? 0.7 : 1,
-                  cursor: is_submitting ? 'not-allowed' : 'pointer',
-                }}
+                className="w-full py-4 px-7 rounded-xl bg-gradient-to-br from-primary-500 to-violet-500 text-white font-bold shadow-primary-md hover:from-primary-600 hover:to-violet-600 hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer font-[inherit] mt-1"
                 disabled={is_submitting}
-                onMouseEnter={(e) => {
-                  if (!is_submitting) {
-                    e.currentTarget.style.background = gradients.primary_hover;
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = shadows.primary_lg;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = gradients.primary;
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = shadows.primary_md;
-                }}
               >
                 <Icon name="paper-plane" size={16} style={{ marginRight: '8px' }} />
                 {is_submitting ? 'Sending...' : 'Send Message'}

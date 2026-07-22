@@ -38,6 +38,8 @@ export default function SharedExpenseTrackerPage() {
           { href: '/split-bills-app', label: 'Split Bills App' },
           { href: '/expense-splitting-app', label: 'Expense Splitting App' },
         ]}
+        breadcrumbName="Shared Expense Tracker"
+        breadcrumbPath="/shared-expense-tracker"
       />
       <Footer />
     </>
