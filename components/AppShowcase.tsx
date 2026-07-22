@@ -33,27 +33,29 @@ const screens = [
 
 export default function AppShowcase() {
   return (
-    <section className="showcase-section section-pad">
+    <section className="bg-gradient-dark text-white section-pad">
       <div className="site-container">
-        <div className="section-heading">
-          <div className="eyebrow" style={{ color: '#c4b5fd', borderColor: 'rgba(196,181,253,0.22)' }}>
+        {/* Section heading */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-violet-400/20 bg-violet-400/10 text-violet-300 text-sm font-semibold mb-5">
             <Icon name="mobile" size={14} />
             App preview
           </div>
-          <h2 className="section-title" style={{ color: 'white' }}>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
             A shared expense tracker your whole group can actually use
           </h2>
-          <p className="section-description" style={{ color: '#cbd5e1' }}>
+          <p className="mt-4 text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
             Monitor group spending, friends balances, and recent activity from one clean
             dashboard on iPhone and Android.
           </p>
         </div>
 
-        <div className="showcase-row">
+        {/* Phone showcase row */}
+        <div className="flex items-end justify-center gap-6 md:gap-10">
           {screens.map((screen, index) => (
             <div
               key={screen.label}
-              className={`showcase-item${index === 1 ? ' is-centered' : ''}`}
+              className={`flex flex-col items-center gap-4 ${index === 1 ? '-translate-y-4' : ''} ${index !== 1 ? 'hidden md:flex' : ''}`}
             >
               <PhoneFrame
                 src={screen.src}
@@ -63,15 +65,9 @@ export default function AppShowcase() {
                 rotate_y={screen.rotateY}
                 rotate_z={screen.rotateZ}
               />
-              <div className="pill-label">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-white/[0.12] bg-white/5 text-slate-300 text-sm">
                 <span
-                  style={{
-                    width: 8,
-                    height: 8,
-                    borderRadius: 999,
-                    background: index === 1 ? '#818cf8' : '#a78bfa',
-                    animation: 'pulseDot 2s ease-in-out infinite',
-                  }}
+                  className={`w-2 h-2 rounded-full animate-pulse-dot ${index === 1 ? 'bg-primary-400' : 'bg-violet-400'}`}
                 />
                 {screen.label}
               </div>

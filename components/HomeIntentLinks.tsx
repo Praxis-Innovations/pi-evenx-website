@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Icon from '@/components/Icon';
 
 const cards = [
   {
@@ -31,25 +32,43 @@ export default function HomeIntentLinks() {
   return (
     <section id="compare" className="section-pad">
       <div className="site-container">
-        <div className="section-heading">
-          <h2 className="section-title">Find the EvenX page that matches your search</h2>
-          <p className="section-description">
+        {/* Section heading */}
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Find the EvenX page that matches your search
+          </h2>
+          <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
             These pages explain how EvenX helps with the most common bill splitting and
             shared expense use cases.
           </p>
         </div>
 
-        <div className="teaser-grid">
+        {/* Card grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {cards.map((card) => (
-            <article key={card.href} className="teaser-card">
-              <h3>{card.title}</h3>
-              <p>{card.description}</p>
-              <div className="teaser-link-row">
-                <Link href={card.href} className="inline-link">
-                  Open {card.title}
+            <article
+              key={card.href}
+              className="border border-slate-100 rounded-2xl bg-white shadow-sm p-5 flex flex-col gap-3
+                         hover:shadow-card hover:border-primary-100 transition-all duration-300"
+            >
+              <h3 className="font-bold text-slate-900">{card.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed flex-1">
+                {card.description}
+              </p>
+              <div className="flex items-center gap-4 pt-1">
+                <Link
+                  href={card.href}
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-500 hover:text-primary-600 transition-colors"
+                >
+                  Open {card.title.split(' ')[0]}
+                  <Icon name="arrow-right" size={14} />
                 </Link>
-                <Link href="/#contact" className="inline-link">
+                <Link
+                  href="/#contact"
+                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-500 hover:text-primary-600 transition-colors"
+                >
                   Ask a question
+                  <Icon name="arrow-right" size={14} />
                 </Link>
               </div>
             </article>

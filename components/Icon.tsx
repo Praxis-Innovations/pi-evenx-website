@@ -25,7 +25,11 @@ export type IconName =
   | 'home'
   | 'redo'
   | 'trash'
-  | 'chevron-down';
+  | 'chevron-down'
+  | 'menu'
+  | 'close'
+  | 'arrow-right'
+  | 'star';
 
 type IconProps = {
   name: IconName;
@@ -96,6 +100,14 @@ function iconPath(name: IconName) {
       return <path fill="currentColor" d="M9 3h6l1 2h4v2H4V5h4l1-2Zm1 6h2v8h-2V9Zm4 0h2v8h-2V9ZM7 9h2v8H7V9Zm-1 12a2 2 0 0 1-2-2V8h16v11a2 2 0 0 1-2 2H6Z" />;
     case 'chevron-down':
       return <path fill="currentColor" d="m7.4 9.4 4.6 4.6 4.6-4.6 1.4 1.4-6 6-6-6 1.4-1.4Z" />;
+    case 'menu':
+      return <path fill="currentColor" d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z" />;
+    case 'close':
+      return <path fill="currentColor" d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12 5.7 16.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4Z" />;
+    case 'arrow-right':
+      return <path fill="currentColor" d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8Z" />;
+    case 'star':
+      return <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" />;
   }
 }
 

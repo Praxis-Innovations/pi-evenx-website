@@ -5,8 +5,8 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
 import { getPasswordStrengthResult, isPasswordStrongEnough } from '@/lib/passwordStrength';
-import { colors, gradients, shadows, radius } from '@/lib/theme';
 import Icon from '@/components/Icon';
+import AuthPageShell from '@/components/AuthPageShell';
 
 type ResetStatus = 'ready' | 'processing' | 'success' | 'error';
 
@@ -24,44 +24,13 @@ interface FormErrors {
  * Loading fallback component for Suspense boundary
  */
 function ResetPasswordLoading() {
-  const styles = {
-    resetPasswordPage: {
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: gradients.hero_bg,
-      padding: '20px',
-    },
-    container: {
-      background: colors.white,
-      padding: '3rem',
-      borderRadius: radius.xl,
-      boxShadow: shadows.xl,
-      maxWidth: '500px',
-      width: '100%',
-      textAlign: 'center' as const,
-    },
-    logo: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: '1rem',
-    },
-    title: {
-      fontSize: '2rem',
-      fontWeight: 700,
-      color: colors.neutral[900],
-      marginBottom: '1rem',
-    },
-  };
-
   return (
-    <div style={styles.resetPasswordPage}>
-      <div style={styles.container}>
-        <div style={styles.logo}>
+    <div className="min-h-screen flex items-center justify-center p-5 bg-gradient-to-br from-primary-600 via-violet-600 to-primary-500">
+      <div className="bg-white p-10 md:p-12 rounded-2xl shadow-2xl max-w-[500px] w-full text-center">
+        <div className="flex justify-center mb-4">
           <Image src="/evenx-logo.png" alt="EvenX logo" width={56} height={56} />
         </div>
-        <h2 style={styles.title}>Loading...</h2>
+        <h2 className="text-2xl font-bold text-slate-900 mb-4">Loading...</h2>
       </div>
     </div>
   );
@@ -104,7 +73,7 @@ function ResetPasswordContent() {
     hasProcessed.current = true;
     setIsLoading(true);
     setResetStatus('processing');
-    setMessage('🔄 Resetting your password...');
+    setMessage('Resetting your password...');
 
     try {
       const response = await fetch(buildApiUrl(ENDPOINTS.RESET_PASSWORD), {
@@ -120,16 +89,16 @@ function ResetPasswordContent() {
 
       if (response.ok) {
         setResetStatus('success');
-        setMessage('✅ Your password has been reset successfully! You can now log in with your new password.');
+        setMessage('Your password has been reset successfully! You can now log in with your new password.');
       } else {
         const errorData = await response.json();
         setResetStatus('error');
-        setMessage(`❌ Password reset failed: ${errorData.message || 'The reset link may be expired or invalid.'}`);
+        setMessage(`Password reset failed: ${errorData.message || 'The reset link may be expired or invalid.'}`);
       }
     } catch (error) {
       console.error('Reset password error:', error);
       setResetStatus('error');
-      setMessage('❌ Password reset failed. The service is currently unavailable. Please try again later or contact support.');
+      setMessage('Password reset failed. The service is currently unavailable. Please try again later or contact support.');
     } finally {
       setIsLoading(false);
     }
@@ -138,7 +107,7 @@ function ResetPasswordContent() {
   useEffect(() => {
     if (!token) {
       setResetStatus('error');
-      setMessage('❌ Invalid reset link. No reset token found.');
+      setMessage('Invalid reset link. No reset token found.');
       return;
     }
   }, [token]);
@@ -170,11 +139,11 @@ function ResetPasswordContent() {
       ...prev,
       [name]: value
     }));
-    
+
     if (name === 'newPassword') {
       setPasswordStrength(getPasswordStrengthResult(value));
     }
-    
+
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
@@ -185,14 +154,14 @@ function ResetPasswordContent() {
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     if (!token) {
       setResetStatus('error');
-      setMessage('❌ Invalid reset link. No reset token found.');
+      setMessage('Invalid reset link. No reset token found.');
       return;
     }
 
@@ -214,212 +183,40 @@ function ResetPasswordContent() {
     setFormData({ newPassword: '', confirmPassword: '' });
   };
 
-  const styles = {
-    resetPasswordPage: {
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: gradients.hero_bg,
-      padding: '20px',
-    },
-    container: {
-      background: colors.white,
-      padding: '3rem',
-      borderRadius: radius.xl,
-      boxShadow: shadows.xl,
-      maxWidth: '500px',
-      width: '100%',
-      textAlign: 'center' as const,
-    },
-    logo: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: '1rem',
-    },
-    title: {
-      fontSize: '2rem',
-      fontWeight: 700,
-      color: colors.neutral[900],
-      marginBottom: '1rem',
-    },
-    subtitle: {
-      color: colors.neutral[500],
-      marginBottom: '2rem',
-      lineHeight: 1.6,
-    },
-    form: {
-      textAlign: 'left' as const,
-    },
-    formGroup: {
-      marginBottom: '1.5rem',
-    },
-    label: {
-      display: 'block',
-      marginBottom: '0.5rem',
-      fontWeight: 500,
-      color: colors.neutral[600],
-    },
-    passwordInputContainer: {
-      position: 'relative' as const,
-      display: 'flex',
-      alignItems: 'center',
-    },
-    passwordInput: {
-      width: '100%',
-      padding: '12px 45px 12px 12px',
-      border: `2px solid ${colors.neutral[200]}`,
-      borderRadius: radius.md,
-      fontSize: '1rem',
-      transition: 'border-color 0.3s ease',
-      outline: 'none',
-      boxSizing: 'border-box' as const,
-      fontFamily: 'inherit',
-    },
-    passwordToggle: {
-      position: 'absolute' as const,
-      right: '12px',
-      top: '50%',
-      transform: 'translateY(-50%)',
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      color: colors.neutral[500],
-      fontSize: '1rem',
-      padding: '4px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      transition: 'color 0.3s ease',
-    },
-    passwordStrengthContainer: {
-      marginTop: '0.5rem',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-    },
-    passwordStrengthBar: {
-      flex: 1,
-      height: '4px',
-      background: colors.neutral[200],
-      borderRadius: '2px',
-      overflow: 'hidden',
-    },
-    passwordStrengthFill: {
-      height: '100%',
-      transition: 'all 0.3s ease',
-      borderRadius: '2px',
-    },
-    passwordStrengthLabel: {
-      fontSize: '0.75rem',
-      fontWeight: 500,
-      minWidth: '60px',
-      textAlign: 'right' as const,
-    },
-    error: {
-      color: colors.error[600],
-      fontSize: '0.875rem',
-      marginTop: '0.25rem',
-    },
-    submitButton: {
-      background: gradients.primary,
-      color: colors.white,
-      border: 'none',
-      padding: '12px 24px',
-      borderRadius: radius.md,
-      fontSize: '1rem',
-      fontWeight: 600,
-      cursor: 'pointer',
-      width: '100%',
-      transition: 'all 0.3s ease',
-      fontFamily: 'inherit',
-    },
-    resetSuccess: {
-      textAlign: 'center' as const,
-    },
-    successIcon: {
-      fontSize: '4rem',
-      color: colors.success[500],
-      marginBottom: '1rem',
-    },
-    resetActions: {
-      display: 'flex',
-      gap: '1rem',
-      marginTop: '2rem',
-      flexDirection: 'row' as const,
-    },
-    btn: {
-      padding: '12px 24px',
-      borderRadius: radius.md,
-      fontSize: '1rem',
-      fontWeight: 600,
-      cursor: 'pointer',
-      border: 'none',
-      textDecoration: 'none',
-      display: 'inline-block',
-      textAlign: 'center' as const,
-      flex: 1,
-      fontFamily: 'inherit',
-    },
-    btnPrimary: {
-      background: gradients.primary,
-      color: colors.white,
-      transition: 'all 0.3s ease',
-    },
-    btnSecondary: {
-      background: 'transparent',
-      color: colors.primary[500],
-      border: `2px solid ${colors.primary[500]}`,
-      transition: 'all 0.3s ease',
-    },
-    resetError: {
-      textAlign: 'center' as const,
-    },
-    errorIcon: {
-      fontSize: '4rem',
-      color: colors.error[500],
-      marginBottom: '1rem',
-    },
-    messageBox: {
-      marginBottom: '2rem',
-      padding: '12px',
-      borderRadius: radius.md,
-      background: colors.error[50],
-      color: colors.error[800],
-      border: `1px solid ${colors.error[200]}`,
-    },
-  };
-
   const renderContent = (): React.ReactNode => {
     if (isLoading) {
       return (
-        <div style={styles.resetSuccess}>
-          <div style={styles.successIcon}>
+        <div className="text-center">
+          <div className="text-primary-500 mb-4">
             <Icon name="spinner" size={56} className="icon-spin" />
           </div>
-          <h2 style={styles.title}>Resetting Password</h2>
-          <p style={styles.messageBox}>{message}</p>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Resetting Password</h2>
+          <p className="mb-6 p-3 rounded-md bg-primary-50 text-primary-800 border border-primary-200 text-sm">
+            {message}
+          </p>
         </div>
       );
     }
 
     if (resetStatus === 'success') {
       return (
-        <div style={styles.resetSuccess}>
-          <div style={styles.successIcon}>
+        <div className="text-center">
+          <div className="text-green-500 mb-4">
             <Icon name="check-circle" size={56} />
           </div>
-          <h2 style={styles.title}>Password Reset Successfully!</h2>
-          <p style={styles.messageBox}>{message}</p>
-          <div style={styles.resetActions}>
-            <button 
-              style={{ ...styles.btn, ...styles.btnPrimary }}
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Password Reset Successfully!</h2>
+          <p className="mb-6 p-3 rounded-md bg-green-50 text-green-800 border border-green-200 text-sm">
+            {message}
+          </p>
+          <div className="flex gap-4 mt-8">
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-gradient-to-br from-primary-500 to-violet-500 text-white transition-all hover:from-primary-600 hover:to-violet-600"
               onClick={handleGoToLogin}
             >
               Go to Login
             </button>
-            <button 
-              style={{ ...styles.btn, ...styles.btnSecondary }}
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-transparent text-primary-500 border-2 border-primary-500 transition-all hover:bg-primary-50"
               onClick={handleGoHome}
             >
               Go to Website
@@ -431,21 +228,23 @@ function ResetPasswordContent() {
 
     if (resetStatus === 'error') {
       return (
-        <div style={styles.resetError}>
-          <div style={styles.errorIcon}>
+        <div className="text-center">
+          <div className="text-red-500 mb-4">
             <Icon name="error" size={56} />
           </div>
-          <h2 style={styles.title}>Password Reset Failed</h2>
-          <p style={styles.messageBox}>{message}</p>
-          <div style={styles.resetActions}>
-            <button 
-              style={{ ...styles.btn, ...styles.btnPrimary }}
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Password Reset Failed</h2>
+          <p className="mb-6 p-3 rounded-md bg-red-50 text-red-800 border border-red-200 text-sm">
+            {message}
+          </p>
+          <div className="flex gap-4 mt-8">
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-gradient-to-br from-primary-500 to-violet-500 text-white transition-all hover:from-primary-600 hover:to-violet-600"
               onClick={handleRetry}
             >
               Try Again
             </button>
-            <button 
-              style={{ ...styles.btn, ...styles.btnSecondary }}
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-transparent text-primary-500 border-2 border-primary-500 transition-all hover:bg-primary-50"
               onClick={handleGoHome}
             >
               Go to Website
@@ -456,14 +255,18 @@ function ResetPasswordContent() {
     }
 
     return (
-      <div style={styles.form}>
-        <h2 style={styles.title}>Reset Your Password</h2>
-        <p style={styles.subtitle}>Enter your new password below to complete the reset process.</p>
-        
+      <div className="text-left">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 text-center">Reset Your Password</h2>
+        <p className="text-slate-500 mb-8 leading-relaxed text-center">
+          Enter your new password below to complete the reset process.
+        </p>
+
         <form onSubmit={handleSubmit}>
-          <div style={styles.formGroup}>
-            <label htmlFor="newPassword" style={styles.label}>New Password</label>
-            <div style={styles.passwordInputContainer}>
+          <div className="mb-6">
+            <label htmlFor="newPassword" className="block mb-2 font-medium text-slate-600">
+              New Password
+            </label>
+            <div className="relative flex items-center">
               <input
                 type={showNewPassword ? "text" : "password"}
                 id="newPassword"
@@ -471,47 +274,48 @@ function ResetPasswordContent() {
                 value={formData.newPassword}
                 onChange={handleInputChange}
                 placeholder="Enter your new password"
-                style={{
-                  ...styles.passwordInput,
-                  borderColor: errors.newPassword ? colors.error[600] : colors.neutral[200]
-                }}
+                className={`w-full py-3 pl-4 pr-12 border-2 rounded-md text-base outline-none transition-all font-[inherit] focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 ${
+                  errors.newPassword ? 'border-red-600' : 'border-slate-200'
+                }`}
                 required
               />
               <button
                 type="button"
-                style={styles.passwordToggle}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-slate-500 p-1 flex items-center justify-center transition-colors hover:text-slate-700"
                 onClick={() => setShowNewPassword(!showNewPassword)}
               >
                 <Icon name={showNewPassword ? 'eye-slash' : 'eye'} size={18} />
               </button>
             </div>
             {formData.newPassword && (
-              <div style={styles.passwordStrengthContainer}>
-                <div style={styles.passwordStrengthBar}>
-                  <div 
+              <div className="mt-2 flex items-center gap-2">
+                <div className="flex-1 h-1 bg-slate-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all"
                     style={{
-                      ...styles.passwordStrengthFill,
                       width: `${(passwordStrength.strength / 5) * 100}%`,
                       background: passwordStrength.color,
                     }}
                   />
                 </div>
-                <span 
-                  style={{
-                    ...styles.passwordStrengthLabel,
-                    color: passwordStrength.color,
-                  }}
+                <span
+                  className="text-xs font-medium min-w-[60px] text-right"
+                  style={{ color: passwordStrength.color }}
                 >
                   {passwordStrength.label}
                 </span>
               </div>
             )}
-            {errors.newPassword && <div style={styles.error}>{errors.newPassword}</div>}
+            {errors.newPassword && (
+              <div className="text-red-600 text-sm mt-1">{errors.newPassword}</div>
+            )}
           </div>
-          
-          <div style={styles.formGroup}>
-            <label htmlFor="confirmPassword" style={styles.label}>Confirm Password</label>
-            <div style={styles.passwordInputContainer}>
+
+          <div className="mb-6">
+            <label htmlFor="confirmPassword" className="block mb-2 font-medium text-slate-600">
+              Confirm Password
+            </label>
+            <div className="relative flex items-center">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
@@ -519,39 +323,36 @@ function ResetPasswordContent() {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
                 placeholder="Confirm your new password"
-                style={{
-                  ...styles.passwordInput,
-                  borderColor: errors.confirmPassword ? colors.error[600] : colors.neutral[200]
-                }}
+                className={`w-full py-3 pl-4 pr-12 border-2 rounded-md text-base outline-none transition-all font-[inherit] focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 ${
+                  errors.confirmPassword ? 'border-red-600' : 'border-slate-200'
+                }`}
                 required
               />
               <button
                 type="button"
-                style={styles.passwordToggle}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-slate-500 p-1 flex items-center justify-center transition-colors hover:text-slate-700"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 <Icon name={showConfirmPassword ? 'eye-slash' : 'eye'} size={18} />
               </button>
             </div>
-            {errors.confirmPassword && <div style={styles.error}>{errors.confirmPassword}</div>}
+            {errors.confirmPassword && (
+              <div className="text-red-600 text-sm mt-1">{errors.confirmPassword}</div>
+            )}
           </div>
-          
-          <button 
-            type="submit" 
-            style={{
-              ...styles.submitButton,
-              opacity: isLoading ? 0.7 : 1,
-              cursor: isLoading ? 'not-allowed' : 'pointer',
-            }}
+
+          <button
+            type="submit"
+            className="w-full py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-gradient-to-br from-primary-500 to-violet-500 text-white transition-all hover:from-primary-600 hover:to-violet-600 disabled:opacity-70 disabled:cursor-not-allowed font-[inherit]"
             disabled={isLoading}
           >
             {isLoading ? 'Resetting...' : 'Reset Password'}
           </button>
         </form>
-        
-        <div style={styles.resetActions}>
-          <button 
-            style={{ ...styles.btn, ...styles.btnSecondary }}
+
+        <div className="flex gap-4 mt-8">
+          <button
+            className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-transparent text-primary-500 border-2 border-primary-500 transition-all hover:bg-primary-50"
             onClick={handleGoHome}
           >
             Back to Website
@@ -562,13 +363,8 @@ function ResetPasswordContent() {
   };
 
   return (
-    <div style={styles.resetPasswordPage}>
-      <div style={styles.container}>
-        <div style={styles.logo}>
-          <Image src="/evenx-logo.png" alt="EvenX logo" width={56} height={56} />
-        </div>
-        {renderContent()}
-      </div>
-    </div>
+    <AuthPageShell>
+      {renderContent()}
+    </AuthPageShell>
   );
 }
