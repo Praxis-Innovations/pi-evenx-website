@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import { buildApiUrl, ENDPOINTS } from '@/config/api';
-import { colors, gradients, shadows, radius } from '@/lib/theme';
 import Icon from '@/components/Icon';
+import AuthPageShell from '@/components/AuthPageShell';
 
 type Status = 'ready' | 'loading' | 'success' | 'error';
 
@@ -18,20 +17,20 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    
+
     if (!email.trim()) {
-      setMessage('❌ Please enter your email address.');
+      setMessage('Please enter your email address.');
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      setMessage('❌ Please enter a valid email address.');
+      setMessage('Please enter a valid email address.');
       return;
     }
 
     setIsLoading(true);
     setStatus('loading');
-    
+
     try {
       const response = await fetch(buildApiUrl(ENDPOINTS.FORGOT_PASSWORD), {
         method: 'POST',
@@ -43,16 +42,16 @@ export default function ForgotPasswordPage() {
 
       if (response.ok) {
         setStatus('success');
-        setMessage('✅ If an account with that email exists, a password reset link has been sent to your email address. Please check your inbox and spam folder.');
+        setMessage('If an account with that email exists, a password reset link has been sent to your email address. Please check your inbox and spam folder.');
       } else {
         const errorData = await response.json();
         setStatus('error');
-        setMessage(`❌ ${errorData.message || 'Failed to send reset link. Please try again.'}`);
+        setMessage(`${errorData.message || 'Failed to send reset link. Please try again.'}`);
       }
     } catch (error) {
       console.error('Forgot password error:', error);
       setStatus('error');
-      setMessage('❌ Failed to send reset link. The service is currently unavailable. Please try again later.');
+      setMessage('Failed to send reset link. The service is currently unavailable. Please try again later.');
     } finally {
       setIsLoading(false);
     }
@@ -72,150 +71,26 @@ export default function ForgotPasswordPage() {
     setEmail('');
   };
 
-  const styles = {
-    forgotPasswordPage: {
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: gradients.hero_bg,
-      padding: '20px',
-    },
-    container: {
-      background: colors.white,
-      padding: '3rem',
-      borderRadius: radius.xl,
-      boxShadow: shadows.xl,
-      maxWidth: '500px',
-      width: '100%',
-      textAlign: 'center' as const,
-    },
-    logo: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginBottom: '1rem',
-    },
-    title: {
-      fontSize: '2rem',
-      fontWeight: 700,
-      color: colors.neutral[900],
-      marginBottom: '1rem',
-    },
-    subtitle: {
-      color: colors.neutral[500],
-      marginBottom: '2rem',
-      lineHeight: 1.6,
-    },
-    form: {
-      textAlign: 'left' as const,
-    },
-    formGroup: {
-      marginBottom: '1.5rem',
-    },
-    label: {
-      display: 'block',
-      marginBottom: '0.5rem',
-      fontWeight: 500,
-      color: colors.neutral[600],
-    },
-    input: {
-      width: '100%',
-      padding: '12px',
-      border: `2px solid ${colors.neutral[200]}`,
-      borderRadius: radius.md,
-      fontSize: '1rem',
-      transition: 'border-color 0.3s ease',
-      boxSizing: 'border-box' as const,
-      outline: 'none',
-      fontFamily: 'inherit',
-    },
-    submitButton: {
-      background: gradients.primary,
-      color: colors.white,
-      border: 'none',
-      padding: '12px 24px',
-      borderRadius: radius.md,
-      fontSize: '1rem',
-      fontWeight: 600,
-      cursor: 'pointer',
-      width: '100%',
-      transition: 'all 0.3s ease',
-      fontFamily: 'inherit',
-    },
-    forgotSuccess: {
-      textAlign: 'center' as const,
-    },
-    successIcon: {
-      fontSize: '4rem',
-      color: colors.success[500],
-      marginBottom: '1rem',
-    },
-    forgotActions: {
-      display: 'flex',
-      gap: '1rem',
-      marginTop: '2rem',
-      flexDirection: 'row' as const,
-    },
-    btn: {
-      padding: '12px 24px',
-      borderRadius: radius.md,
-      fontSize: '1rem',
-      fontWeight: 600,
-      cursor: 'pointer',
-      border: 'none',
-      textDecoration: 'none',
-      display: 'inline-block',
-      textAlign: 'center' as const,
-      flex: 1,
-      fontFamily: 'inherit',
-    },
-    btnPrimary: {
-      background: gradients.primary,
-      color: colors.white,
-      transition: 'all 0.3s ease',
-    },
-    btnSecondary: {
-      background: 'transparent',
-      color: colors.primary[500],
-      border: `2px solid ${colors.primary[500]}`,
-      transition: 'all 0.3s ease',
-    },
-    forgotError: {
-      textAlign: 'center' as const,
-    },
-    errorIcon: {
-      fontSize: '4rem',
-      color: colors.error[500],
-      marginBottom: '1rem',
-    },
-    messageBox: {
-      marginBottom: '2rem',
-      padding: '12px',
-      borderRadius: radius.md,
-      background: colors.error[50],
-      color: colors.error[800],
-      border: `1px solid ${colors.error[200]}`,
-    },
-  };
-
   const renderContent = (): React.ReactNode => {
     if (status === 'success') {
       return (
-        <div style={styles.forgotSuccess}>
-          <div style={styles.successIcon}>
+        <div className="text-center">
+          <div className="text-green-500 mb-4">
             <Icon name="mail-open" size={56} />
           </div>
-          <h2 style={styles.title}>Check Your Email</h2>
-          <p style={styles.messageBox}>{message}</p>
-          <div style={styles.forgotActions}>
-            <button 
-              style={{ ...styles.btn, ...styles.btnPrimary }}
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Check Your Email</h2>
+          <p className="mb-6 p-3 rounded-md bg-green-50 text-green-800 border border-green-200 text-sm">
+            {message}
+          </p>
+          <div className="flex gap-4 mt-8">
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-gradient-to-br from-primary-500 to-violet-500 text-white transition-all hover:from-primary-600 hover:to-violet-600"
               onClick={handleGoToLogin}
             >
               Back to Login
             </button>
-            <button 
-              style={{ ...styles.btn, ...styles.btnSecondary }}
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-transparent text-primary-500 border-2 border-primary-500 transition-all hover:bg-primary-50"
               onClick={handleGoHome}
             >
               Go to Website
@@ -227,21 +102,23 @@ export default function ForgotPasswordPage() {
 
     if (status === 'error') {
       return (
-        <div style={styles.forgotError}>
-          <div style={styles.errorIcon}>
+        <div className="text-center">
+          <div className="text-red-500 mb-4">
             <Icon name="error" size={56} />
           </div>
-          <h2 style={styles.title}>Something Went Wrong</h2>
-          <p style={styles.messageBox}>{message}</p>
-          <div style={styles.forgotActions}>
-            <button 
-              style={{ ...styles.btn, ...styles.btnPrimary }}
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Something Went Wrong</h2>
+          <p className="mb-6 p-3 rounded-md bg-red-50 text-red-800 border border-red-200 text-sm">
+            {message}
+          </p>
+          <div className="flex gap-4 mt-8">
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-gradient-to-br from-primary-500 to-violet-500 text-white transition-all hover:from-primary-600 hover:to-violet-600"
               onClick={handleRetry}
             >
               Try Again
             </button>
-            <button 
-              style={{ ...styles.btn, ...styles.btnSecondary }}
+            <button
+              className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-transparent text-primary-500 border-2 border-primary-500 transition-all hover:bg-primary-50"
               onClick={handleGoHome}
             >
               Go to Website
@@ -252,42 +129,46 @@ export default function ForgotPasswordPage() {
     }
 
     return (
-      <div style={styles.form}>
-        <h2 style={styles.title}>Forgot Your Password?</h2>
-        <p style={styles.subtitle}>No worries! Enter your email address and we&apos;ll send you a link to reset your password.</p>
-        
-        {message && <div style={styles.messageBox}>{message}</div>}
-        
+      <div className="text-left">
+        <h2 className="text-2xl font-bold text-slate-900 mb-4 text-center">Forgot Your Password?</h2>
+        <p className="text-slate-500 mb-8 leading-relaxed text-center">
+          No worries! Enter your email address and we&apos;ll send you a link to reset your password.
+        </p>
+
+        {message && (
+          <div className="mb-6 p-3 rounded-md bg-red-50 text-red-800 border border-red-200 text-sm">
+            {message}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
-          <div style={styles.formGroup}>
-            <label htmlFor="email" style={styles.label}>Email Address</label>
+          <div className="mb-6">
+            <label htmlFor="email" className="block mb-2 font-medium text-slate-600">
+              Email Address
+            </label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
-              style={styles.input}
+              className="w-full py-3 px-4 border-2 border-slate-200 rounded-md text-base outline-none transition-all font-[inherit] focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
               required
             />
           </div>
-          
-          <button 
-            type="submit" 
-            style={{
-              ...styles.submitButton,
-              opacity: isLoading ? 0.7 : 1,
-              cursor: isLoading ? 'not-allowed' : 'pointer',
-            }}
+
+          <button
+            type="submit"
+            className="w-full py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-gradient-to-br from-primary-500 to-violet-500 text-white transition-all hover:from-primary-600 hover:to-violet-600 disabled:opacity-70 disabled:cursor-not-allowed font-[inherit]"
             disabled={isLoading}
           >
             {isLoading ? 'Sending...' : 'Send Reset Link'}
           </button>
         </form>
-        
-        <div style={styles.forgotActions}>
-          <button 
-            style={{ ...styles.btn, ...styles.btnSecondary }}
+
+        <div className="flex gap-4 mt-8">
+          <button
+            className="flex-1 py-3 px-6 rounded-md text-base font-semibold cursor-pointer bg-transparent text-primary-500 border-2 border-primary-500 transition-all hover:bg-primary-50"
             onClick={handleGoHome}
           >
             Back to Website
@@ -298,13 +179,8 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div style={styles.forgotPasswordPage}>
-      <div style={styles.container}>
-        <div style={styles.logo}>
-          <Image src="/evenx-logo.png" alt="EvenX logo" width={56} height={56} />
-        </div>
-        {renderContent()}
-      </div>
-    </div>
+    <AuthPageShell>
+      {renderContent()}
+    </AuthPageShell>
   );
 }
