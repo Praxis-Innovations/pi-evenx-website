@@ -9,6 +9,7 @@ import Faq from '@/components/Faq';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import SeoJsonLd from '@/components/SeoJsonLd';
+import AnimateOnScroll from '@/components/AnimateOnScroll';
 import {
   buildFaqJsonLd,
   buildMetadata,
@@ -34,12 +35,24 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Features />
-        <AppShowcase />
-        <About />
-        <HomeIntentLinks />
-        <Faq />
-        <Contact />
+        <AnimateOnScroll variant="fade-up">
+          <Features />
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="fade-in">
+          <AppShowcase />
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="fade-up">
+          <About />
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="fade-up" delay={100}>
+          <HomeIntentLinks />
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="fade-up">
+          <Faq />
+        </AnimateOnScroll>
+        <AnimateOnScroll variant="fade-in">
+          <Contact />
+        </AnimateOnScroll>
       </main>
       <Footer />
     </>

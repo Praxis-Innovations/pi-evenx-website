@@ -48,26 +48,39 @@ export default function Features() {
   return (
     <section id="features" className="section-pad">
       <div className="site-container">
-        <div className="section-heading">
-          <div className="eyebrow">
+        {/* Section heading */}
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary-200 bg-primary-50 text-primary-600 text-sm font-semibold mb-5">
             <Icon name="bolt" size={14} />
             Core features
           </div>
-          <h2 className="section-title">Everything you need in a split bills app</h2>
-          <p className="section-description">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Everything you need in a split bills app
+          </h2>
+          <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
             EvenX helps groups split expenses fairly, keep a clean history, and settle
             balances without manual calculations.
           </p>
         </div>
 
-        <div className="feature-grid">
+        {/* Feature grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((feature) => (
-            <article key={feature.title} className="feature-card">
-              <div className="feature-icon">
+            <article
+              key={feature.title}
+              className="relative overflow-hidden border border-slate-100 rounded-2xl bg-white shadow-sm p-6
+                         before:absolute before:top-0 before:inset-x-0 before:h-1 before:bg-gradient-primary before:rounded-t-2xl
+                         hover:-translate-y-1 hover:shadow-card transition-all duration-300"
+            >
+              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary-500 to-violet-500 shadow-primary-sm flex items-center justify-center text-white mb-4">
                 <Icon name={feature.icon} size={24} />
               </div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
+              <h3 className="text-lg font-bold text-slate-900 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-slate-500 leading-relaxed">
+                {feature.description}
+              </p>
             </article>
           ))}
         </div>
