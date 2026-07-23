@@ -36,6 +36,8 @@ export default function Footer() {
             <Link href="/split-bills-app" className="text-slate-300 hover:text-white transition-colors text-sm">Split Bills App</Link>
             <Link href="/expense-splitting-app" className="text-slate-300 hover:text-white transition-colors text-sm">Expense Splitting App</Link>
             <Link href="/shared-expense-tracker" className="text-slate-300 hover:text-white transition-colors text-sm">Shared Expense Tracker</Link>
+            <Link href="/rent-split-calculator" className="text-slate-300 hover:text-white transition-colors text-sm">Rent Split Calculator</Link>
+            <Link href="/splitwise-alternative" className="text-slate-300 hover:text-white transition-colors text-sm">Splitwise Alternative</Link>
           </div>
 
           {/* Support column */}

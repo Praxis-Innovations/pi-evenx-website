@@ -19,6 +19,7 @@ type IntentLandingPageProps = {
   relatedLinks: Array<{ href: string; label: string }>;
   breadcrumbName: string;
   breadcrumbPath: string;
+  breadcrumbItems?: ReadonlyArray<{ name: string; path: string }>;
 };
 
 export default function IntentLandingPage({
@@ -32,14 +33,17 @@ export default function IntentLandingPage({
   relatedLinks,
   breadcrumbName,
   breadcrumbPath,
+  breadcrumbItems,
 }: IntentLandingPageProps) {
   return (
     <main className="pt-24 pb-16">
       <SeoJsonLd
-        data={buildBreadcrumbJsonLd([
-          { name: 'Home', path: '/' },
-          { name: breadcrumbName, path: breadcrumbPath },
-        ])}
+        data={buildBreadcrumbJsonLd(
+          breadcrumbItems ?? [
+            { name: 'Home', path: '/' },
+            { name: breadcrumbName, path: breadcrumbPath },
+          ],
+        )}
       />
       <div className="site-container space-y-12">
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">

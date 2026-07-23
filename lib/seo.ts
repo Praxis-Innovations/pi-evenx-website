@@ -18,6 +18,8 @@ export const siteConfig = {
     'bill splitting calculator',
     'split rent app',
     'shared expenses app',
+    'splitwise alternative',
+    'rent split calculator',
   ],
   organization: {
     name: 'EvenX',
@@ -32,6 +34,11 @@ type MetadataInput = {
   path?: string;
   robots?: Metadata['robots'];
   keywords?: string[];
+};
+
+type Step = {
+  name: string;
+  text: string;
 };
 
 export function absoluteUrl(path = '/') {
@@ -183,8 +190,54 @@ export function buildFaqJsonLd(
   };
 }
 
+export function buildHowToJsonLd(params: {
+  name: string;
+  description: string;
+  path: string;
+  steps: ReadonlyArray<Step>;
+  totalTime?: string;
+} = {
+  name: 'How to Split Expenses with the EvenX Calculator',
+  description:
+    'Use the free EvenX split expenses calculator to divide bills evenly, by custom amounts, or by ratio among any number of people.',
+  path: '/split-expenses',
+  steps: [
+    {
+      name: 'Add people',
+      text: 'Enter the names of everyone sharing the expense.',
+    },
+    {
+      name: 'Add expenses',
+      text: 'Enter each expense with the amount and who paid.',
+    },
+    {
+      name: 'Choose split type',
+      text: 'Select even split, custom amounts, or ratio-based splitting.',
+    },
+    {
+      name: 'View settlements',
+      text: 'See exactly who owes whom and how much to settle up.',
+    },
+  ],
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: params.name,
+    description: params.description,
+    totalTime: params.totalTime ?? 'PT5M',
+    url: absoluteUrl(params.path),
+    step: params.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+    })),
+  };
+}
+
 export function buildBreadcrumbJsonLd(
-  items: Array<{ name: string; path: string }>,
+  items: ReadonlyArray<{ name: string; path: string }>,
 ) {
   return {
     '@context': 'https://schema.org',
@@ -195,37 +248,5 @@ export function buildBreadcrumbJsonLd(
       name: item.name,
       item: absoluteUrl(item.path),
     })),
-  };
-}
-
-export function buildHowToJsonLd() {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'HowTo',
-    name: 'How to Split Expenses with the EvenX Calculator',
-    description:
-      'Use the free EvenX split expenses calculator to divide bills evenly, by custom amounts, or by ratio among any number of people.',
-    step: [
-      {
-        '@type': 'HowToStep',
-        name: 'Add people',
-        text: 'Enter the names of everyone sharing the expense.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Add expenses',
-        text: 'Enter each expense with the amount and who paid.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'Choose split type',
-        text: 'Select even split, custom amounts, or ratio-based splitting.',
-      },
-      {
-        '@type': 'HowToStep',
-        name: 'View settlements',
-        text: 'See exactly who owes whom and how much to settle up.',
-      },
-    ],
   };
 }

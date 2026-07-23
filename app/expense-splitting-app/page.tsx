@@ -8,6 +8,14 @@ export const metadata: Metadata = buildMetadata({
   title: 'Expense Splitting App',
   description:
     'EvenX is an expense splitting app for travel groups, friends, roommates, and shared events. Split costs fairly and keep a running balance for the whole group.',
+  keywords: [
+    'expense splitting app',
+    'group expense app',
+    'trip expense app',
+    'split expenses with friends',
+    'travel expense calculator',
+    'expense splitting for roommates',
+  ],
   path: '/expense-splitting-app',
 });
 
@@ -37,6 +45,8 @@ export default function ExpenseSplittingAppPage() {
         relatedLinks={[
           { href: '/split-bills-app', label: 'Split Bills App' },
           { href: '/shared-expense-tracker', label: 'Shared Expense Tracker' },
+          { href: '/rent-split-calculator', label: 'Rent Split Calculator' },
+          { href: '/splitwise-alternative', label: 'Splitwise Alternative' },
         ]}
         breadcrumbName="Expense Splitting App"
         breadcrumbPath="/expense-splitting-app"

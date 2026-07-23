@@ -8,6 +8,13 @@ export const metadata: Metadata = buildMetadata({
   title: 'Shared Expense Tracker',
   description:
     'Track shared expenses with EvenX. Review balances, expense history, and settlements for roommates, couples, trips, and recurring group spending.',
+  keywords: [
+    'shared expense tracker',
+    'group expense tracker',
+    'expense history app',
+    'roommate expense tracker',
+    'shared budget tracker',
+  ],
   path: '/shared-expense-tracker',
 });
 
@@ -37,6 +44,8 @@ export default function SharedExpenseTrackerPage() {
         relatedLinks={[
           { href: '/split-bills-app', label: 'Split Bills App' },
           { href: '/expense-splitting-app', label: 'Expense Splitting App' },
+          { href: '/rent-split-calculator', label: 'Rent Split Calculator' },
+          { href: '/splitwise-alternative', label: 'Splitwise Alternative' },
         ]}
         breadcrumbName="Shared Expense Tracker"
         breadcrumbPath="/shared-expense-tracker"
