@@ -19,6 +19,7 @@ export const metadata: Metadata = buildMetadata({
     'bill split calculator',
     'expense split tool',
     'split bill with friends',
+    'split expenses calculator',
     'shared expense calculator',
     'divide expenses equally',
     'split rent calculator',
@@ -26,6 +27,8 @@ export const metadata: Metadata = buildMetadata({
     'roommate expense calculator',
     'group bill calculator',
     'free bill splitter',
+    'rent split calculator',
+    'group expense tool',
   ],
 });
 
@@ -115,6 +118,31 @@ export default function SplitExpensesPage() {
       <main className={styles.page}>
         <div className={`site-container ${styles.pageShell}`}>
           <SplitExpensesTool />
+          <section className={styles.surface} style={{ marginTop: '1rem' }}>
+            <h2 style={{ marginBottom: '0.5rem', color: 'var(--color-neutral-900)' }}>
+              Next page for rent and alternatives
+            </h2>
+            <p style={{ color: 'var(--color-neutral-500)' }}>
+              If this calculator is for monthly rent, shared utilities, or comparing options in your
+              current app, these pages often help users move from a single bill to a longer-running
+              plan.
+            </p>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.8rem',
+                marginTop: '0.85rem',
+              }}
+            >
+              <Link href="/rent-split-calculator" className="inline-link">
+                Rent Split Calculator
+              </Link>
+              <Link href="/splitwise-alternative" className="inline-link">
+                Splitwise Alternative
+              </Link>
+            </div>
+          </section>
         </div>
       </main>
 

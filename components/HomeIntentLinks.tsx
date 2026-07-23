@@ -26,6 +26,18 @@ const cards = [
     description:
       'For groups that want a clear running history of who paid, who owes, and what has been settled.',
   },
+  {
+    href: '/rent-split-calculator',
+    title: 'Rent Split Calculator',
+    description:
+      'For roommates and housemates balancing rent, utilities, and recurring shared household costs.',
+  },
+  {
+    href: '/splitwise-alternative',
+    title: 'Splitwise Alternative',
+    description:
+      'For users comparing shared expense apps and checking the fit for recurring group-based splitting.',
+  },
 ] as const;
 
 export default function HomeIntentLinks() {
