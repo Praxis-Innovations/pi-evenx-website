@@ -22,8 +22,7 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "build:local": "NEXT_PUBLIC_API_URL=http://localhost:8080 next build",
-    "build:dev": "NEXT_PUBLIC_API_URL=http://35.244.150.211 next build",
-    "build:preview": "NEXT_PUBLIC_API_URL=http://35.244.150.211 next build",
+    "build:placeholder": "NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-https://api.invalid} next build",
     "build:prod": "NEXT_PUBLIC_API_URL=https://api.evenx.io next build"
   },
   "devDependencies": {
