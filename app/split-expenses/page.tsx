@@ -160,7 +160,7 @@ export default function SplitExpensesPage() {
             <p>
               Start by adding the names of everyone in your group. Then enter each expense: what it was for,
               how much it cost, and who paid. For each expense you can choose an <strong>even split</strong> (everyone
-              pays equally), a <strong>custom split</strong> (you set each person's share), or a <strong>ratio-based
+              pays equally), a <strong>custom split</strong> (you set each person&apos;s share), or a <strong>ratio-based
               split</strong> (proportional amounts based on ratios you define).
             </p>
             <p>
