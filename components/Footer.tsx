@@ -27,6 +27,7 @@ export default function Footer() {
             <Link href="/#compare" className="text-slate-300 hover:text-white transition-colors text-sm">Use Cases</Link>
             <Link href="/#faq" className="text-slate-300 hover:text-white transition-colors text-sm">FAQ</Link>
             <Link href="/#contact" className="text-slate-300 hover:text-white transition-colors text-sm">Contact</Link>
+            <Link href="/products" className="text-slate-300 hover:text-white transition-colors text-sm">Our Products</Link>
           </div>
 
           {/* Search Pages column */}

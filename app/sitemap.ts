@@ -9,6 +9,7 @@ const routes = [
   '/shared-expense-tracker',
   '/rent-split-calculator',
   '/splitwise-alternative',
+  '/products',
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
