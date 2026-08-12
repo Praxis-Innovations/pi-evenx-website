@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimateOnScroll from '@/components/AnimateOnScroll';
@@ -27,8 +28,9 @@ const products = [
     description:
       "A free browser-based Liar's Dice game where you bluff, bid, and challenge AI opponents. Features multiple rule variants including Dudo and Perudo, comprehensive strategy guides, and no sign-up required.",
     href: 'https://liars-dice.app/',
-    color: 'from-amber-500 to-orange-600',
-    iconBg: 'from-amber-500 to-orange-600',
+    logo: '/products/liarsdice-logo.png',
+    gradient: 'from-amber-500 to-orange-600',
+    bgLight: 'bg-amber-50',
   },
   {
     title: 'PlaySequence',
@@ -36,8 +38,9 @@ const products = [
     description:
       'A cross-platform Sequence card game with real-time multiplayer, private rooms, bot practice, leaderboards, and coin rewards. Play online with friends from any device.',
     href: 'https://playsequence.app/',
-    color: 'from-teal-500 to-emerald-600',
-    iconBg: 'from-teal-500 to-emerald-600',
+    logo: '/products/sequence-logo.png',
+    gradient: 'from-teal-500 to-emerald-600',
+    bgLight: 'bg-teal-50',
   },
   {
     title: 'Praxis Innovations',
@@ -45,8 +48,9 @@ const products = [
     description:
       'The team behind EvenX, PlaySequence, and more. We build mobile apps and online games that are simple, polished, and fun to use.',
     href: 'https://praxisinnovations.ca/',
-    color: 'from-blue-500 to-cyan-600',
-    iconBg: 'from-blue-500 to-cyan-600',
+    logo: '/products/praxis-logo.png',
+    gradient: 'from-blue-500 to-cyan-600',
+    bgLight: 'bg-blue-50',
   },
 ] as const;
 
@@ -79,31 +83,44 @@ export default function ProductsPage() {
         <AnimateOnScroll variant="fade-up">
           <section className="py-16 lg:py-20">
             <div className="site-container">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {products.map((product) => (
                   <a
                     key={product.title}
                     href={product.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group border border-slate-100 rounded-2xl bg-white shadow-sm p-6 transition-all duration-300 hover:shadow-card hover:border-primary-100 hover:-translate-y-1 flex flex-col"
+                    className="group border border-slate-100 rounded-2xl bg-white shadow-card p-0 overflow-hidden transition-all duration-300 hover:shadow-card-hover hover:border-primary-100 hover:-translate-y-1.5 flex flex-col"
                   >
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${product.iconBg} shadow-sm flex items-center justify-center mb-4`}>
-                      <Icon name="arrow-right" size={20} className="text-white" />
+                    {/* Logo area */}
+                    <div className={`${product.bgLight} p-8 flex items-center justify-center border-b border-slate-100`}>
+                      <div className="w-20 h-20 rounded-2xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                        <Image
+                          src={product.logo}
+                          alt={`${product.title} logo`}
+                          width={56}
+                          height={56}
+                          className="object-contain"
+                        />
+                      </div>
                     </div>
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-xs font-medium w-fit mb-3">
-                      {product.category}
-                    </span>
-                    <h2 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">
-                      {product.title}
-                    </h2>
-                    <p className="text-slate-600 text-sm leading-relaxed mb-4 flex-1">
-                      {product.description}
-                    </p>
-                    <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-500 group-hover:text-primary-600 transition-colors">
-                      Visit {product.title}
-                      <Icon name="arrow-right" size={14} />
-                    </span>
+
+                    {/* Content */}
+                    <div className="p-6 flex flex-col flex-1">
+                      <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold w-fit mb-3 bg-gradient-to-r ${product.gradient} text-white`}>
+                        {product.category}
+                      </span>
+                      <h2 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">
+                        {product.title}
+                      </h2>
+                      <p className="text-slate-600 text-sm leading-relaxed mb-5 flex-1">
+                        {product.description}
+                      </p>
+                      <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-500 group-hover:text-primary-600 group-hover:gap-2.5 transition-all">
+                        Visit {product.title}
+                        <Icon name="arrow-right" size={14} />
+                      </span>
+                    </div>
                   </a>
                 ))}
               </div>
