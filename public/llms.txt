@@ -1,0 +1,26 @@
+# EvenX
+
+> Split bills and shared expenses with friends, roommates, couples, and groups. EvenX is a mobile app for iOS and Android that tracks who owes what and settles up fast.
+
+EvenX is built by Praxis Innovations Inc. It handles group expense splitting, trip costs, rent, and everyday shared spending. The marketing site at evenx.io includes an interactive split-expenses calculator, feature overviews, and downloadable app links.
+
+## Tools
+
+- [Split Expenses Calculator](https://www.evenx.io/split-expenses): Interactive tool for splitting bills by amount, percentage, or shares
+- [Home](https://www.evenx.io/): Overview, features, screenshots, and app store links
+
+## Use Cases
+
+- [Split Bills App](https://www.evenx.io/split-bills-app): Bill splitting for groups, trips, and roommates
+- [Expense Splitting App](https://www.evenx.io/expense-splitting-app): Track and split shared expenses
+- [Shared Expense Tracker](https://www.evenx.io/shared-expense-tracker): Keep a running ledger of group spending
+- [Rent Split Calculator](https://www.evenx.io/rent-split-calculator): Fair rent division by room size, income, or custom shares
+- [Splitwise Alternative](https://www.evenx.io/splitwise-alternative): Compare EvenX to Splitwise
+
+## More from Praxis Innovations
+
+- [Our Products](https://www.evenx.io/products): Other apps and games by Praxis Innovations
+
+## Optional
+
+- [Sitemap](https://www.evenx.io/sitemap.xml): Machine-readable list of public URLs

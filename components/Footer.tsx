@@ -27,6 +27,7 @@ export default function Footer() {
             <Link href="/#compare" className="text-slate-300 hover:text-white transition-colors text-sm">Use Cases</Link>
             <Link href="/#faq" className="text-slate-300 hover:text-white transition-colors text-sm">FAQ</Link>
             <Link href="/#contact" className="text-slate-300 hover:text-white transition-colors text-sm">Contact</Link>
+            <Link href="/products" className="text-slate-300 hover:text-white transition-colors text-sm">Our Products</Link>
           </div>
 
           {/* Search Pages column */}
@@ -69,7 +70,10 @@ export default function Footer() {
 
         {/* Divider and copyright */}
         <div className="mt-8 pt-6 border-t border-white/10 text-center text-slate-400 text-sm">
-          &copy; 2026 EvenX. All rights reserved.
+          &copy; 2026 EvenX. All rights reserved. A product of{' '}
+          <a href="https://praxisinnovations.ca/" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-white transition-colors underline">
+            Praxis Innovations Inc.
+          </a>
         </div>
       </div>
     </footer>
