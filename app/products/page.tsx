@@ -17,7 +17,7 @@ export const metadata: Metadata = buildMetadata({
     'praxis innovations games',
     'evenx app',
     'liars dice online',
-    'play sequence online',
+    'alignfive online',
   ],
 });
 
@@ -33,11 +33,11 @@ const products = [
     bgLight: 'bg-amber-50',
   },
   {
-    title: 'PlaySequence',
+    title: 'AlignFive',
     category: 'Real-Time Multiplayer Game',
     description:
       'A cross-platform Sequence card game with real-time multiplayer, private rooms, bot practice, leaderboards, and coin rewards. Play online with friends from any device.',
-    href: 'https://playsequence.app/',
+    href: 'https://alignfive.app',
     logo: '/products/sequence-logo.png',
     gradient: 'from-teal-500 to-emerald-600',
     bgLight: 'bg-teal-50',
@@ -46,7 +46,7 @@ const products = [
     title: 'Praxis Innovations',
     category: 'Software Studio',
     description:
-      'The team behind EvenX, PlaySequence, and more. We build mobile apps and online games that are simple, polished, and fun to use.',
+      'The team behind EvenX, AlignFive, and more. We build mobile apps and online games that are simple, polished, and fun to use.',
     href: 'https://praxisinnovations.ca/',
     logo: '/products/praxis-logo.png',
     gradient: 'from-blue-500 to-cyan-600',
